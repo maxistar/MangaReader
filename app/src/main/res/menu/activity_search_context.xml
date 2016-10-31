@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_view_manga"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/View_Manga"
+        android:icon="@drawable/unfavorited" />
+</menu>

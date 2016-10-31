@@ -1,0 +1,135 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .gitignore
+* bin_utils/
+* bin_utils/checklangs.php
+* bin_utils/proofread.php
+* bin_utils/stringvalues.php
+* ic_launcher-web.png
+* images/
+* images/512.png
+* images/512.svg
+* images/bookmark-missing.svg
+* images/bowtie.svg
+* images/download.svg
+* images/error_image.svg
+* images/favorited.svg
+* images/globe.svg
+* images/hair_manga.svg
+* images/help-about.svg
+* images/ic_launcher.svg
+* images/manga_eye_left.svg
+* images/manga_eye_right.svg
+* images/mangagroid.svg
+* images/mangaloading.svg
+* images/resized/
+* images/resized/default_download.png
+* images/resized/default_download.svg
+* images/resized/default_error_image.png
+* images/resized/default_error_image.svg
+* images/resized/default_globe.png
+* images/resized/default_globe.svg
+* images/resized/default_ic_launcher.png
+* images/resized/default_ic_launcher.svg
+* images/resized/default_mangaloading.png
+* images/resized/default_mangaloading.svg
+* images/resized/default_stored.png
+* images/resized/default_stored.svg
+* images/resized/hdpi_download.png
+* images/resized/hdpi_download.svg
+* images/resized/hdpi_error_image.png
+* images/resized/hdpi_error_image.svg
+* images/resized/hdpi_globe.png
+* images/resized/hdpi_globe.svg
+* images/resized/hdpi_ic_launcher.png
+* images/resized/hdpi_ic_launcher.svg
+* images/resized/hdpi_mangaloading.png
+* images/resized/hdpi_mangaloading.svg
+* images/resized/hdpi_stored.png
+* images/resized/hdpi_stored.svg
+* images/resized/ldpi_download.png
+* images/resized/ldpi_download.svg
+* images/resized/ldpi_error_image.png
+* images/resized/ldpi_error_image.svg
+* images/resized/ldpi_globe.png
+* images/resized/ldpi_globe.svg
+* images/resized/ldpi_ic_launcher.png
+* images/resized/ldpi_ic_launcher.svg
+* images/resized/ldpi_mangaloading.png
+* images/resized/ldpi_mangaloading.svg
+* images/resized/ldpi_stored.png
+* images/resized/ldpi_stored.svg
+* images/resized/mdpi_download.png
+* images/resized/mdpi_download.svg
+* images/resized/mdpi_error_image.png
+* images/resized/mdpi_error_image.svg
+* images/resized/mdpi_globe.png
+* images/resized/mdpi_globe.svg
+* images/resized/mdpi_ic_launcher.png
+* images/resized/mdpi_ic_launcher.svg
+* images/resized/mdpi_mangaloading.png
+* images/resized/mdpi_mangaloading.svg
+* images/resized/mdpi_stored.png
+* images/resized/mdpi_stored.svg
+* images/resized/xhdpi_download.png
+* images/resized/xhdpi_download.svg
+* images/resized/xhdpi_error_image.png
+* images/resized/xhdpi_error_image.svg
+* images/resized/xhdpi_globe.png
+* images/resized/xhdpi_globe.svg
+* images/resized/xhdpi_ic_launcher.png
+* images/resized/xhdpi_ic_launcher.svg
+* images/resized/xhdpi_mangaloading.png
+* images/resized/xhdpi_mangaloading.svg
+* images/resized/xhdpi_stored.png
+* images/resized/xhdpi_stored.svg
+* images/scalesvg.php
+* images/stored.svg
+* images/unfavorited.svg
+* images/updating.svg
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+android-support-v4.jar => com.android.support:support-v4:18.0.0
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app/src/main/AndroidManifest.xml
+* assets/ => app/src/main/assets
+* res/ => app/src/main/res/
+* src/ => app/src/main/java/
+* Test/res/ => app/src/androidTest/res/
+* Test/src/ => app/src/androidTest/java/
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

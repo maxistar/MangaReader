@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_view_volume"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/View_volume"
+        android:icon="@drawable/unfavorited"/>
+    
+    <item
+        android:id="@+id/menu_remove_from_favorites"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/Remove_From_Favorites"
+        android:icon="@drawable/unfavorited"/>
+</menu>

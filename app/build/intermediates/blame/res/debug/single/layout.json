@@ -1,0 +1,34 @@
+[
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/layout/activity_main.xml",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/layout/activity_volume.xml",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/layout/activity_volume.xml"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/layout/activity_favorites.xml",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/layout/activity_favorites.xml"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/layout/activity_volumes.xml",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/layout/activity_volumes.xml"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/layout/activity_search.xml",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/layout/activity_search.xml"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/layout/search_item.xml",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/layout/search_item.xml"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/layout/volume_item.xml",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/layout/volume_item.xml"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/layout/search_separator.xml",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/layout/search_separator.xml"
+    }
+]

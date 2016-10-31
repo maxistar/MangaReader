@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Мангекё Ридер</string>
+    <string name="empty"></string>
+    <string name="menu_settings">Настройки</string>
+    <string name="Search">Поиск</string>
+    <string name="Volumes">Выпуски</string>
+    <string name="Volume">Выпуск</string>
+    <string name="Settings">Настройки</string>
+    <string name="Favorites">Избранное</string>
+	<string name="Refresh_Images">Обновить изображения</string>
+	<string name="Refresh_Volumes">Обновить выпуски</string>
+	<string name="Add_To_Favorites">Добавить в Избранное</string>
+	<string name="Remove_From_Favorites">Удалить из Избранного</string>
+	<string name="Download_Volume">Загрузить выпуск</string>
+	<string name="Downloading_">Загружаем&#8230;</string>
+	<string name="Loading_">Загружаем&#8230;</string>
+	<string name="Search_Manga">Искать Мангу</string>
+	<string name="List_is_empty">Список пуст</string>
+	<string name="View_volume">Просмотреть выпуск</string>
+	<string name="View_Manga">Просмотреть мангу</string>
+	<string name="Network_Error">Ошибка сети</string>
+	<string name="Download_All">Загрузить все</string>
+	<string name="Manga_Sources">Источники манги</string>
+	<string name="Version">Версия</string>
+	<string name="About_Software">О Программе</string>
+	<string name="shortly_about_application">немного о программе</string>
+	<string name="About">О Программе</string>
+	<string name="Mark_as_read">Пометить как прочитанный</string>
+	<string name="Mark_as_unread">Пометить как непрочитанный</string>
+	<string name="ImageTooLarge">Изображение слишком большое, извините, не достачно памяти, чтобы показать страницу.</string>
+	<string name="Next">&gt;&gt;</string>
+	<string name="Previous">&lt;&lt;</string>
+	<string name="ReadAgain">Читать Снова</string>
+</resources>

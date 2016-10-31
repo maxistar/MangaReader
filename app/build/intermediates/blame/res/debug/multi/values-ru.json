@@ -1,0 +1,615 @@
+[
+    {
+        "outputFile": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/values-ru/values-ru.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 45,
+                    "endOffset": 96
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 27,
+                        "startColumn": 1,
+                        "startOffset": 1360,
+                        "endColumn": 42,
+                        "endOffset": 1401
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 101,
+                    "endColumn": 54,
+                    "endOffset": 151
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 25,
+                        "startColumn": 1,
+                        "startOffset": 1237,
+                        "endColumn": 51,
+                        "endOffset": 1287
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 156,
+                    "endColumn": 65,
+                    "endOffset": 217
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 1,
+                        "startOffset": 531,
+                        "endColumn": 62,
+                        "endOffset": 592
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 222,
+                    "endColumn": 54,
+                    "endOffset": 272
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 1,
+                        "startOffset": 1090,
+                        "endColumn": 51,
+                        "endOffset": 1140
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 277,
+                    "endColumn": 60,
+                    "endOffset": 333
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 1,
+                        "startOffset": 663,
+                        "endColumn": 57,
+                        "endOffset": 719
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 338,
+                    "endColumn": 51,
+                    "endOffset": 385
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 1,
+                        "startOffset": 721,
+                        "endColumn": 54,
+                        "endOffset": 774
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 390,
+                    "endColumn": 47,
+                    "endOffset": 433
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 367,
+                        "endColumn": 47,
+                        "endOffset": 410
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 438,
+                    "endColumn": 125,
+                    "endOffset": 559
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 30,
+                        "startColumn": 1,
+                        "startOffset": 1533,
+                        "endColumn": 122,
+                        "endOffset": 1654
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 564,
+                    "endColumn": 53,
+                    "endOffset": 613
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 1,
+                        "startOffset": 878,
+                        "endColumn": 50,
+                        "endOffset": 927
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 618,
+                    "endColumn": 47,
+                    "endOffset": 661
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 1,
+                        "startOffset": 776,
+                        "endColumn": 50,
+                        "endOffset": 825
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 666,
+                    "endColumn": 57,
+                    "endOffset": 719
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 23,
+                        "startColumn": 1,
+                        "startOffset": 1142,
+                        "endColumn": 54,
+                        "endOffset": 1195
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 724,
+                    "endColumn": 65,
+                    "endOffset": 785
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 28,
+                        "startColumn": 1,
+                        "startOffset": 1403,
+                        "endColumn": 62,
+                        "endOffset": 1464
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 790,
+                    "endColumn": 69,
+                    "endOffset": 855
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 29,
+                        "startColumn": 1,
+                        "startOffset": 1466,
+                        "endColumn": 66,
+                        "endOffset": 1531
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 860,
+                    "endColumn": 53,
+                    "endOffset": 909
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 1,
+                        "startOffset": 1039,
+                        "endColumn": 50,
+                        "endOffset": 1088
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 914,
+                    "endColumn": 35,
+                    "endOffset": 945
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 31,
+                        "startColumn": 1,
+                        "startOffset": 1656,
+                        "endColumn": 38,
+                        "endOffset": 1693
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 950,
+                    "endColumn": 45,
+                    "endOffset": 991
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 32,
+                        "startColumn": 1,
+                        "startOffset": 1695,
+                        "endColumn": 42,
+                        "endOffset": 1736
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 996,
+                    "endColumn": 50,
+                    "endOffset": 1042
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 33,
+                        "startColumn": 1,
+                        "startOffset": 1738,
+                        "endColumn": 47,
+                        "endOffset": 1784
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 1047,
+                    "endColumn": 63,
+                    "endOffset": 1106
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 1,
+                        "startOffset": 412,
+                        "endColumn": 60,
+                        "endOffset": 471
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 1111,
+                    "endColumn": 60,
+                    "endOffset": 1167
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 1,
+                        "startOffset": 473,
+                        "endColumn": 57,
+                        "endOffset": 529
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 1172,
+                    "endColumn": 71,
+                    "endOffset": 1239
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 1,
+                        "startOffset": 594,
+                        "endColumn": 68,
+                        "endOffset": 661
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 1244,
+                    "endColumn": 40,
+                    "endOffset": 1280
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 193,
+                        "endColumn": 40,
+                        "endOffset": 229
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 1285,
+                    "endColumn": 53,
+                    "endOffset": 1334
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 1,
+                        "startOffset": 827,
+                        "endColumn": 50,
+                        "endOffset": 876
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 1339,
+                    "endColumn": 46,
+                    "endOffset": 1381
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 320,
+                        "endColumn": 46,
+                        "endOffset": 362
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 1386,
+                    "endColumn": 42,
+                    "endOffset": 1424
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 24,
+                        "startColumn": 1,
+                        "startOffset": 1197,
+                        "endColumn": 39,
+                        "endOffset": 1235
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 1429,
+                    "endColumn": 56,
+                    "endOffset": 1481
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 1,
+                        "startOffset": 985,
+                        "endColumn": 53,
+                        "endOffset": 1037
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 1486,
+                    "endColumn": 58,
+                    "endOffset": 1540
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 1,
+                        "startOffset": 929,
+                        "endColumn": 55,
+                        "endOffset": 983
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 1545,
+                    "endColumn": 41,
+                    "endOffset": 1582
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 278,
+                        "endColumn": 41,
+                        "endOffset": 315
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 29,
+                    "startColumn": 4,
+                    "startOffset": 1587,
+                    "endColumn": 43,
+                    "endOffset": 1626
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 234,
+                        "endColumn": 43,
+                        "endOffset": 273
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 30,
+                    "startColumn": 4,
+                    "startOffset": 1631,
+                    "endColumn": 50,
+                    "endOffset": 1677
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 50,
+                        "endOffset": 101
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 31,
+                    "startColumn": 4,
+                    "startOffset": 1682,
+                    "endColumn": 26,
+                    "endOffset": 1704
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 106,
+                        "endColumn": 34,
+                        "endOffset": 136
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 32,
+                    "startColumn": 4,
+                    "startOffset": 1709,
+                    "endColumn": 51,
+                    "endOffset": 1756
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 141,
+                        "endColumn": 51,
+                        "endOffset": 188
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 33,
+                    "startColumn": 4,
+                    "startOffset": 1761,
+                    "endColumn": 73,
+                    "endOffset": 1830
+                },
+                "from": {
+                    "file": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/values-ru/strings.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 1,
+                        "startOffset": 1289,
+                        "endColumn": 70,
+                        "endOffset": 1358
+                    }
+                }
+            }
+        ]
+    }
+]

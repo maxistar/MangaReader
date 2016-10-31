@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:key="preferences" >
+   <PreferenceCategory 
+        android:title="@string/Manga_Sources">
+        <CheckBoxPreference  
+			android:key="source_manga_reader"  
+			android:title=""  
+			android:summary="" 
+			android:defaultValue="true" />
+        <CheckBoxPreference  
+			android:key="source_mangable"  
+			android:title=""  
+			android:summary="" 
+			android:defaultValue="true" />
+        <CheckBoxPreference  
+			android:key="source_adult_manga"  
+			android:title=""  
+			android:summary="" 
+			android:defaultValue="true" />      
+		<CheckBoxPreference  
+			android:key="source_mangaeden"  
+			android:title=""  
+			android:summary="" 
+			android:defaultValue="true" />
+		<CheckBoxPreference  
+			android:key="source_mangahere"  
+			android:title=""  
+			android:summary="" 
+			android:defaultValue="true" />
+		<CheckBoxPreference  
+			android:key="source_readmangame"  
+			android:title=""  
+			android:summary="" 
+			android:defaultValue="true" />
+    </PreferenceCategory> 
+    <PreferenceCategory 
+        android:title="@string/About">
+        <Preference 
+            android:key="version_name"
+            android:summary=""
+            android:title="@string/Version" />
+        <com.maxistar.mangabrowser.AboutBox
+			android:title="@string/About_Software"  
+			android:summary="@string/shortly_about_application"
+			android:dialogTitle="@string/About" /> 
+        </PreferenceCategory>
+</PreferenceScreen>

@@ -1,0 +1,34 @@
+[
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/globe.png",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable-hdpi/globe.png"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/mangaloading.png",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable-hdpi/mangaloading.png"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/favorited.png",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable-hdpi/favorited.png"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/unfavorited.png",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable-hdpi/unfavorited.png"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/error_image.png",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable-hdpi/error_image.png"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/download.png",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable-hdpi/download.png"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/stored.png",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable-hdpi/stored.png"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_launcher.png",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable-hdpi/ic_launcher.png"
+    }
+]

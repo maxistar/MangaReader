@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable/stored.png",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable/stored.png"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable/list_selector.xml",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable/list_selector.xml"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable/ic_launcher.png",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable/ic_launcher.png"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable/overscroll_right.xml",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable/overscroll_right.xml"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable/globe.png",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable/globe.png"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable/favorited.png",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable/favorited.png"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable/unfavorited.png",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable/unfavorited.png"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable/error_image.png",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable/error_image.png"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable/mangaloading.png",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable/mangaloading.png"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable/download.png",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable/download.png"
+    },
+    {
+        "merged": "/home/maxim/sandbox/android_projects/MangaReader/app/build/intermediates/res/merged/debug/drawable/overscroll_left.xml",
+        "source": "/home/maxim/sandbox/android_projects/MangaReader/app/src/main/res/drawable/overscroll_left.xml"
+    }
+]
