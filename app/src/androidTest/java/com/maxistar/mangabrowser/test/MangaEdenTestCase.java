@@ -38,7 +38,7 @@ public class MangaEdenTestCase extends TestCase {
 	public void testSearch(){
 		MangaEden m = new MangaEden();
 		SearchResult sr = m.search("Ninetails ", 0);	
-		MangableTestCase.assertEquals(1, sr.getItems().size());
+		Assert.assertEquals(1, sr.getItems().size());
 		
 		MangaItem mi = sr.getItems().get(0);
 		

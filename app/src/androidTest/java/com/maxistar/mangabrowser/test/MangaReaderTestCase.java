@@ -29,7 +29,7 @@ public class MangaReaderTestCase extends TestCase {
 		MangaItem mi = sr.getItems().get(0);
 		
 		ArrayList <VolumeItem> volumes = m.getVolumes(mi);
-		Assert.assertEquals(63, volumes.size());
+		Assert.assertEquals(108, volumes.size());
 		
 		for (VolumeItem v : volumes) {
 			assertTrue(v.url.indexOf("http://")==0 || v.url.indexOf("https://")==0);
