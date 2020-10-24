@@ -17,7 +17,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -131,8 +130,7 @@ public class FavoritesActivity extends ListActivity {
             
         	if (mData.get(position).thumnail_url!=null){
         		imageloader.displayImage(mData.get(position).thumnail_url, (ImageView)convertView.findViewById(R.id.preview));
-        	}
-        	else {
+        	} else {
         		((ImageView)convertView.findViewById(R.id.preview)).setImageResource(R.drawable.mangaloading);
         	}
         	

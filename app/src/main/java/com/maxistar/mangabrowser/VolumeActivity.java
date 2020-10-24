@@ -28,7 +28,7 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
 	int item_id = 0;
 	int totalVolumes; //total volumes in manga
 	MangaItem manga;
-	ArrayList<File>files;
+	ArrayList <File> files;
 	ImagePager imagePager;
 	VolumesCache cache;
 	RelativeLayout navigationBar;
@@ -39,10 +39,9 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
 		super.onCreate(savedInstanceState);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
-		if (savedInstanceState!=null){
+		if (savedInstanceState != null) {
         	restoreState(savedInstanceState);
-        }
-        else {
+        } else {
         	initState();
         }
 		
@@ -61,11 +60,10 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
 	    
 	    
 		View empty = (View) findViewById(android.R.id.empty);
-		if(MangaLoader.getVolumeStatus(manga, item)==MangaLoader.MANGA_LOADED){
+		if(MangaLoader.getVolumeStatus(manga, item) == MangaLoader.MANGA_LOADED){
 			empty.setVisibility(View.GONE);
 	    	initBitmaps();
-		}
-		else {
+		} else {
 			imagePager.setVisibility(View.GONE);	
 			downloadImages();
 		    VolumesActivity.update_flag = true;
@@ -74,12 +72,11 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
 		}	
 		
 		setupNavigationButtons();
-		
 	}
 	
-	void setupNavigationButtons(){
+	void setupNavigationButtons() {
 		Button button = (Button) this.findViewById(R.id.previous_vol);
-		if (item_id==this.totalVolumes-1) {
+		if (item_id == this.totalVolumes - 1) {
 			button.setVisibility(View.GONE);
 		}
 		button.setOnClickListener(new OnClickListener() {
@@ -98,7 +95,7 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
 		});
 		
 		button = (Button) this.findViewById(R.id.next_vol);
-		if (item_id==0) {
+		if (item_id == 0) {
 			button.setVisibility(View.GONE);
 		}
 		button.setOnClickListener(new OnClickListener() {
@@ -109,15 +106,15 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
 		});
 	}
 	
-	void readNext(){
+	void readNext() {
 		Intent intent = new Intent(this,
 				VolumeActivity.class);
-		intent.putExtra(MStrings.ITEM, item_id-1);
+		intent.putExtra(MStrings.ITEM, item_id - 1);
 		intent.putExtra(MStrings.MANGA, this.manga);
 		startActivity(intent);
 	}
 
-	void readAgain(){
+	void readAgain() {
 		Intent intent = new Intent(this,
 				VolumeActivity.class);
 		item.page_num = 0;
@@ -127,10 +124,10 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
 		startActivity(intent);
 	}
 	
-	void readPrevious(){
+	void readPrevious() {
 		Intent intent = new Intent(this,
 				VolumeActivity.class);
-		intent.putExtra(MStrings.ITEM, item_id+1);
+		intent.putExtra(MStrings.ITEM, item_id + 1);
 		intent.putExtra(MStrings.MANGA, this.manga);
 		startActivity(intent);
 	}
@@ -139,11 +136,10 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
 		checkNavigationVisibility();
 	}
 	
-	void checkNavigationVisibility(){
-		if (this.files.size() == this.item.page_num+1) {
+	void checkNavigationVisibility() {
+		if (this.files.size() == this.item.page_num + 1) {
 			this.showNavigationBar();
-		}
-		else {
+		} else {
 			this.hideNavigationBar();
 		}
 	}
@@ -156,39 +152,39 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
 		this.navigationBar.setVisibility(View.GONE);
 	}
 	
-	void initAds(){
+	void initAds() {
 		// Create an ad.
 	    RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT); // You might want to tweak these to WRAP_CONTENT
 	    lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-
-	    
 	}
 	
-	void restoreState(Bundle state){
+	void restoreState(Bundle state) {
         item_id = state.getInt("item_id");
         manga = (MangaItem)state.getSerializable("manga");
     }
     
-    void initState(){
+    void initState() {
 		item_id = this.getIntent().getExtras().getInt(MStrings.ITEM);
 		manga = (MangaItem)this.getIntent().getExtras().getSerializable(MStrings.MANGA);
     }
   
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable("manga",manga);
-        outState.putInt("item_id",item_id);
+        outState.putSerializable("manga", manga);
+        outState.putInt("item_id", item_id);
     }
 
 	void initBitmaps(){
 		files = new ArrayList<File>();
-		String foldername = Environment.getExternalStorageDirectory()+MStrings.SLASH+MStrings.MANGABROWSER
-					+ MStrings.SLASH
-					+ MangaUtils.getFolderName(manga.manga_type)+MStrings.SLASH+manga.getFolderName()+MStrings.SLASH
-					+ item.getFolderName();
+		String foldername = Environment.getExternalStorageDirectory()
+				+ MStrings.SLASH + MStrings.MANGABROWSER
+				+ MStrings.SLASH
+				+ MangaUtils.getFolderName(manga.manga_type) + MStrings.SLASH
+				+ manga.getFolderName() + MStrings.SLASH
+				+ item.getFolderName();
 		File dir = new File(foldername);
     	
-		if (!dir.exists()){
+		if (!dir.exists()) {
 			showToast(l(R.string.Network_Error));
 			return;
 		}
@@ -244,20 +240,18 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
 
 	@Override
 	public boolean onPrepareOptionsMenu (Menu menu){
-		if(MangaUtils.isItemFavorited(getApplicationContext(), manga)){
+		if (MangaUtils.isItemFavorited(getApplicationContext(), manga)) {
 			menu.findItem(R.id.add_to_favorites).setVisible(false);
 			menu.findItem(R.id.remove_from_favorites).setVisible(true);
-		}
-		else {
+		} else {
 			menu.findItem(R.id.add_to_favorites).setVisible(true);
 			menu.findItem(R.id.remove_from_favorites).setVisible(false);
 		}
-		
 		return true;
 	}
 	
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected (MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_refresh_images:
 			downloadImages();

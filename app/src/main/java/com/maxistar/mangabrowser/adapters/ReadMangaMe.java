@@ -64,7 +64,7 @@ import com.maxistar.mangabrowser.VolumeItem;
 
 public class ReadMangaMe extends BaseSearchAdapter {
 	
-	void init(){
+	void init() {
 		server_address = "http://readmanga.me";
 		settings_key = "source_readmangame";
 		name = "Read Manga dot Me";
@@ -102,8 +102,12 @@ public class ReadMangaMe extends BaseSearchAdapter {
 			SearchResult result = new SearchResult();
 
 			while (m.find()) {
-				MangaItem item = new MangaItem(m.group(3),
-						m.group(1), 0, TYPE_ADULT_MANGA);
+				MangaItem item = new MangaItem(
+						m.group(3),
+						m.group(1),
+						0,
+						TYPE_ADULT_MANGA
+				);
 				item.thumnail_url = m.group(2);//m.group(1);
 				result.addItem(item);
 			}
@@ -150,8 +154,11 @@ public class ReadMangaMe extends BaseSearchAdapter {
 				title = title.replaceAll("[\\s]+", " ");
 				//p1.
 				
-				VolumeItem item1 = new VolumeItem(title,
-						server_address + m.group(1), TYPE_READ_MANGA_ME);
+				VolumeItem item1 = new VolumeItem(
+						title,
+						server_address + m.group(1),
+						TYPE_READ_MANGA_ME
+				);
 				result.add(item1);
 			}
 
@@ -248,7 +255,7 @@ public class ReadMangaMe extends BaseSearchAdapter {
 			page = this.getGetData(item.url);
 			
 			//
-			if (page.indexOf("нажмите сюда, чтобы продолжить чтение")!=-1){
+			if (page.indexOf("нажмите сюда, чтобы продолжить чтение") != -1) {
 				page = this.getGetData(item.url + "?mature=1");				
 			}
 			
@@ -256,13 +263,13 @@ public class ReadMangaMe extends BaseSearchAdapter {
 			page = page.substring(pos+"var pictures = ".length());
 
 			pos = page.indexOf("var prevLink");
-			page = page.substring(0, pos-3);
+			page = page.substring(0, pos - 3);
 			
 			JSONArray result2 = new JSONArray(page);
 			
 			//int num = 1;
 			
-			for(int i=0;i<result2.length();i++){
+			for(int i = 0; i < result2.length(); i++) {
 				JSONObject obj = result2.getJSONObject(i);
 				result.add(obj.getString("url"));
 				//downloadImage(obj.getString("url"), num, foldername);

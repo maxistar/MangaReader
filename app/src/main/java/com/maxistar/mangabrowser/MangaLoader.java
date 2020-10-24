@@ -21,7 +21,6 @@ public class MangaLoader {
 
 	final int stub_id = R.drawable.download;
 	static private MangaLoader instance = null;
-	// OnProgressUpdateListener progress_listener = null;
 
 	ExecutorService executorService;
 	Handler handler = new Handler();// handler to display images in UI thread
@@ -227,7 +226,5 @@ public class MangaLoader {
 		void onDownloadComplete(VolumeItem item);
 		
 		void onDownloadStarted(VolumeItem item);
-		
 	}
-
 }

@@ -14,15 +14,13 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.util.Log;
-
 import com.maxistar.mangabrowser.MangaItem;
 import com.maxistar.mangabrowser.SearchResult;
 import com.maxistar.mangabrowser.VolumeItem;
 
 public class MangaEden extends BaseSearchAdapter {
 	
-	void init(){
+	void init() {
 		server_address = "http://www.mangaeden.com";
 		settings_key = "source_mangaeden";
 		name = "MangaEden";
@@ -34,7 +32,7 @@ public class MangaEden extends BaseSearchAdapter {
 	/**
 	 * 
 	 */
-	public SearchResult search(String word, int page){
+	public SearchResult search(String word, int page) {
 		//http://www.mangaeden.com/en-directory/?title=Bleach&author=&artist=&releasedType=0&released=
 		SearchResult result = new SearchResult();
 		try {
@@ -70,7 +68,7 @@ public class MangaEden extends BaseSearchAdapter {
 	/**
 	 * Returns get of volumes
 	 */
-	public ArrayList<VolumeItem> getVolumes(MangaItem item){
+	public ArrayList<VolumeItem> getVolumes(MangaItem item) {
 		ArrayList<VolumeItem> result = new ArrayList<VolumeItem>();
 		try {
 			String results = this.getGetData(server_address + item.url);
@@ -133,7 +131,7 @@ public class MangaEden extends BaseSearchAdapter {
 		}		
 	}*/
 	
-	public ArrayList<String> getImageUrls(VolumeItem item){
+	public ArrayList <String> getImageUrls(VolumeItem item) {
 		ArrayList<String> result = new ArrayList<String>();
 
 		try {

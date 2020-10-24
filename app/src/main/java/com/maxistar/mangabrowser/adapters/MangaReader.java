@@ -64,7 +64,7 @@ import com.maxistar.mangabrowser.VolumeItem;
 
 public class MangaReader extends BaseSearchAdapter {
 	
-	void init(){
+	void init() {
 		server_address = "http://www.mangareader.net";
 		settings_key = "source_manga_reader";
 		name = "Manga Reader";
@@ -78,7 +78,6 @@ public class MangaReader extends BaseSearchAdapter {
 		SearchResult result = new SearchResult();
 
 		try {
-			
 			String results = this
 					.getGetData("http://www.mangareader.net/search/?w="
 							+ URLEncoder.encode(word, "ISO-8859-1")
@@ -98,11 +97,13 @@ public class MangaReader extends BaseSearchAdapter {
 
 			Matcher m = p.matcher(results);
 
-
 			while (m.find()) {
-				
-				MangaItem item = new MangaItem(m.group(3),
-						m.group(2), 0, TYPE_MANGA_READER);
+				MangaItem item = new MangaItem(
+						m.group(3),
+						m.group(2),
+						0,
+						TYPE_MANGA_READER
+				);
 				item.thumnail_url = m.group(1);
 				result.addItem(item);
 			}
@@ -125,15 +126,12 @@ public class MangaReader extends BaseSearchAdapter {
 					.compile("<td>\\s*<div class=\"chico_manga\"></div>\\s*<a href=\"([^\"]+)\">([^<]+)</a>([^<]+)</td>");
 			Matcher m = p.matcher(results);
 
-
 			while (m.find()) {
 				
 				VolumeItem item1 = new VolumeItem(m.group(2) + m.group(3),
 						server_address + m.group(1), TYPE_MANGA_READER);
 				result.add(item1);
 			}
-			
-
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -251,7 +249,7 @@ public class MangaReader extends BaseSearchAdapter {
 				list.add(m.group(1));
 			}
 			 
-			for(String addr: list){
+			for(String addr: list) {
 				String results = this.getGetData(server_address + addr);
 				
 	   
@@ -275,7 +273,6 @@ public class MangaReader extends BaseSearchAdapter {
 				//}
 				//num++;
 			}
-			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

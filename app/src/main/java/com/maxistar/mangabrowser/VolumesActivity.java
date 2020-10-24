@@ -54,8 +54,10 @@ public class VolumesActivity extends ListActivity implements
 					int position, long id) {
 				//VolumeItem item1 = mData.get(position);
 
-				Intent intent = new Intent(VolumesActivity.this,
-						VolumeActivity.class);
+				Intent intent = new Intent(
+						VolumesActivity.this,
+						VolumeActivity.class
+				);
 				intent.putExtra(MStrings.ITEM, position);
 				intent.putExtra(MStrings.MANGA, item);
 				startActivity(intent);
@@ -66,15 +68,17 @@ public class VolumesActivity extends ListActivity implements
 		MangaLoader.setProgressListener(this);
 	}
 	
-	void copyCachedDataToList(){
-		VolumesCache cache = VolumesCache.getCachedItems(item,
-				getApplicationContext());
-		if (cache==null) return; //nothing to copy
+	void copyCachedDataToList() {
+		VolumesCache cache = VolumesCache.getCachedItems(
+				item,
+				getApplicationContext()
+		);
+		if (cache == null) return; //nothing to copy
 		TreeMap<String, VolumeItem> items_by_url = new TreeMap<String, VolumeItem>();
-		for(VolumeItem item: cache.items){
+		for (VolumeItem item: cache.items) {
 			items_by_url.put(item.url, item);
 		}
-		for(VolumeItem item: mData){
+		for (VolumeItem item: mData) {
 			if (!items_by_url.containsKey(item.url)) continue; //nothing to copy
 			VolumeItem old_item = items_by_url.get(item.url);
 			item.read_flag = old_item.read_flag;
@@ -91,8 +95,10 @@ public class VolumesActivity extends ListActivity implements
 	protected void onResume() {
 		super.onResume();
 
-		VolumesCache cache = VolumesCache.getCachedItems(item,
-				getApplicationContext());
+		VolumesCache cache = VolumesCache.getCachedItems(
+				item,
+				getApplicationContext()
+		);
 		if (cache == null || (cache != null && cache.info == null)) {
 			mData = new ArrayList<VolumeItem>();
 			mAdapter = new VolumesAdapter();
@@ -168,8 +174,11 @@ public class VolumesActivity extends ListActivity implements
 	}
 
 	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v,
-			ContextMenuInfo menuInfo) {
+	public void onCreateContextMenu(
+			ContextMenu menu,
+			View v,
+			ContextMenuInfo menuInfo
+	) {
 		getMenuInflater().inflate(R.menu.activity_volumes_context, menu);
 	}
 
@@ -180,20 +189,20 @@ public class VolumesActivity extends ListActivity implements
 		VolumeItem item1 = mData.get(info.position);
 
 		switch (item2.getItemId()) {
-		case R.id.menu_download_volume:
-			MangaLoader.downloadManga(item, item1);
-			updateImageForItem(item1);
-			return true;
-		case R.id.menu_mark_read:
-			item1.read_flag = true;
-			saveCache();
-			this.mAdapter.notifyDataSetChanged();
-			return true;
-		case R.id.menu_mark_unread:
-			item1.read_flag = false;
-			saveCache();
-			this.mAdapter.notifyDataSetChanged();
-			return true;
+			case R.id.menu_download_volume:
+				MangaLoader.downloadManga(item, item1);
+				updateImageForItem(item1);
+				return true;
+			case R.id.menu_mark_read:
+				item1.read_flag = true;
+				saveCache();
+				this.mAdapter.notifyDataSetChanged();
+				return true;
+			case R.id.menu_mark_unread:
+				item1.read_flag = false;
+				saveCache();
+				this.mAdapter.notifyDataSetChanged();
+				return true;
 		}
 		return super.onContextItemSelected(item2);
 	}
@@ -264,8 +273,11 @@ public class VolumesActivity extends ListActivity implements
 
 	}
 
-	private void displayImage(MangaItem manga, VolumeItem volume,
-			ImageView imageView) {
+	private void displayImage(
+			MangaItem manga,
+			VolumeItem volume,
+			ImageView imageView
+	) {
 		itemViews.put(volume.getUniqueKey(), imageView);
 		viewItems.put(imageView, volume.getUniqueKey());
 

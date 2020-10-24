@@ -66,7 +66,7 @@ import com.maxistar.mangabrowser.VolumeItem;
 
 public class AdultManga extends BaseSearchAdapter {
 	
-	void init(){
+	void init() {
 		server_address = "http://adultmanga.ru";
 		settings_key = "source_adult_manga";
 		name = "Adult Manga";
@@ -74,10 +74,6 @@ public class AdultManga extends BaseSearchAdapter {
 	}
 	
 	public SearchResult search(String word, int page) {
-		/*
-		
-		*/
-
 		try {
 			List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 			postParams.add(new BasicNameValuePair("q", word));
@@ -102,8 +98,12 @@ public class AdultManga extends BaseSearchAdapter {
 			SearchResult result = new SearchResult();
 
 			while (m.find()) {
-				MangaItem item = new MangaItem(m.group(3),
-						m.group(1), 0, TYPE_ADULT_MANGA);
+				MangaItem item = new MangaItem(
+						m.group(3),
+						m.group(1),
+						0,
+						TYPE_ADULT_MANGA
+				);
 				item.thumnail_url = m.group(2);//m.group(1);
 				result.addItem(item);
 			}
@@ -148,8 +148,11 @@ public class AdultManga extends BaseSearchAdapter {
 				title = title.replaceAll("[\\s]+", " ");
 				//p1.
 				
-				VolumeItem item1 = new VolumeItem(title,
-						this.server_address + m.group(1), TYPE_ADULT_MANGA);
+				VolumeItem item1 = new VolumeItem(
+						title,
+						this.server_address + m.group(1),
+						TYPE_ADULT_MANGA
+				);
 				result.add(item1);
 			}
 
@@ -243,16 +246,16 @@ public class AdultManga extends BaseSearchAdapter {
 		String page;
 		try {
 			page = this.getGetData(item.url);
-			if (page.indexOf("нажмите сюда, чтобы продолжить чтение")!=-1){
+			if (page.indexOf("нажмите сюда, чтобы продолжить чтение") != -1) {
 				page = this.getGetData(item.url + "?mature=1");				
 			}
 			int pos = page.indexOf("var pictures = ");
 			page = page.substring(pos+"var pictures = ".length());
 			pos = page.indexOf("var prevLink");
-			page = page.substring(0, pos-3);
+			page = page.substring(0, pos - 3);
 			
 			JSONArray result1 = new JSONArray(page);
-			for(int i=0;i<result1.length();i++){
+			for(int i = 0; i < result1.length(); i++) {
 				JSONObject obj = result1.getJSONObject(i);
 				result.add(obj.getString("url"));
 			}

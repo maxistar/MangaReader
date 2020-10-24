@@ -13,7 +13,7 @@ public class VolumeItem implements Serializable {
 	public int page_num = 0;
 	boolean read_flag = false;
 	
-	public VolumeItem(String name,String url,int type){
+	public VolumeItem(String name, String url, int type) {
 		this.name = name;
 		this.url = url;
 		this.manga_type = type;
@@ -37,8 +37,8 @@ public class VolumeItem implements Serializable {
 	 * 
 	 * @return
 	 */
-	public boolean equals(VolumeItem item){
-		if (this.manga_type!=item.manga_type) return false;
+	public boolean equals (VolumeItem item) {
+		if (this.manga_type != item.manga_type) return false;
 		if (!this.url.equals(item.url)) return false;
 		return true;
 	}

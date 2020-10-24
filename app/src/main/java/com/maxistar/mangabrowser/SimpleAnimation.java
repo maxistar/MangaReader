@@ -37,7 +37,7 @@ public class SimpleAnimation implements Animation {
 	 */
 	@Override
 	public boolean update() {
-			if(zoomAnimationListener != null) {
+			if (zoomAnimationListener != null) {
 				zoomAnimationListener.onZoom(0, 0, 0);
 				zoomAnimationListener.onComplete();
 			}

@@ -24,8 +24,8 @@ public class MangaItem implements Serializable {
 	 * should be pretyu unique;
 	 * @return
 	 */
-	public String getFavoritesKey(){
-		return MangaUtils.getFolderName(this.manga_type)+MStrings.COLON+this.url;
+	public String getFavoritesKey() {
+		return MangaUtils.getFolderName(this.manga_type) + MStrings.COLON + this.url;
 	}
 	
 	public String getFolderName(){

@@ -45,8 +45,9 @@ class VolumesCache implements Serializable {
 	}
 
 	static VolumesCache getCachedItems(MangaItem item, Context context){
-		String filename = MStrings.VOLUME+MStrings.UNDERSTROKE+MangaUtils.getFolderName(item.manga_type)+MStrings.UNDERSTROKE
-				+item.getFolderName();
+		String filename = MStrings.VOLUME + MStrings.UNDERSTROKE
+				+ MangaUtils.getFolderName(item.manga_type) + MStrings.UNDERSTROKE
+				+ item.getFolderName();
 		try {
 			FileInputStream fis = context.getApplicationContext().openFileInput(filename);
 			ObjectInputStream objectIn = new ObjectInputStream(fis);
@@ -63,11 +64,9 @@ class VolumesCache implements Serializable {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-
 }

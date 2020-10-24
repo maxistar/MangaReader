@@ -72,7 +72,7 @@ public class ImagePager extends View implements Animator.Animable {
 	Handler handler = new Handler();
 	/**
 	 * Class constructor taking only a context. Use this constructor to create
-	 * {@link PieChart} objects from your own code.
+	 * objects from your own code.
 	 * 
 	 * @param context
 	 */
@@ -83,13 +83,12 @@ public class ImagePager extends View implements Animator.Animable {
 
 	/**
 	 * Class constructor taking a context and an attribute set. This constructor
-	 * is used by the layout engine to construct a {@link PieChart} from a set
+	 * is used by the layout engine to construct a from a set
 	 * of XML attributes.
 	 * 
 	 * @param context
 	 * @param attrs
 	 *            An attribute set which can contain attributes from
-	 *            {@link com.example.android.customviews.R.styleable.PieChart}
 	 *            as well as attributes inherited from {@link android.view.View}
 	 *            .
 	 */
@@ -104,8 +103,12 @@ public class ImagePager extends View implements Animator.Animable {
 		//
 		// This call uses R.styleable.PieChart, which is an array of
 		// the custom attributes that were declared in attrs.xml.
-		TypedArray a = context.getTheme().obtainStyledAttributes(attrs,
-				R.styleable.ViewPager, 0, 0);
+		TypedArray a = context.getTheme().obtainStyledAttributes(
+				attrs,
+				R.styleable.ViewPager,
+				0,
+				0
+		);
 
 		try {
 			// Retrieve the values from the TypedArray and store into
@@ -215,10 +218,9 @@ public class ImagePager extends View implements Animator.Animable {
 						next_matrix.postTranslate(-step_diff, 0);
 						next_offset -= step_diff;						
 					}
-				}
-				else {
+				} else {
 					
-					if (next_offset+step_diff>=viewWidth*2){
+					if (next_offset + step_diff >= viewWidth * 2) {
 						animationStop();
 						item.page_num--;
 						handler.postDelayed(new Runnable(){
@@ -254,19 +256,17 @@ public class ImagePager extends View implements Animator.Animable {
 				float step_diff = 10f;
 				
 				if (mode == ImagePager.SCROLLING_NEXT) {
-					if (next_offset+step_diff>=viewWidth){
+					if (next_offset + step_diff >= viewWidth) {
 						animationStop();
 						next_bitmap = null;
 						mode = NONE;
-					}
-					else { //do step
+					} else { //do step
 						matrix.postTranslate(step_diff, 0);
 						next_matrix.postTranslate(step_diff, 0);
 						next_offset += step_diff;						
 					}
-				}
-				else {
-					if (next_offset-step_diff<=viewWidth){
+				} else {
+					if (next_offset - step_diff <= viewWidth){
 						animationStop();
 						next_bitmap = null;
 						mode = NONE;
@@ -376,11 +376,11 @@ public class ImagePager extends View implements Animator.Animable {
 		Bitmap bitmap;
 		try {
 			bitmap =  BitmapFactory.decodeFile(files.get(index).getAbsolutePath());
-			if (bitmap==null){
+			if (bitmap == null) {
 				bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.error_image);
 			}
 		}
-		catch(OutOfMemoryError e){
+		catch (OutOfMemoryError e) {
 			owner.showToast(owner.l(R.string.ImageTooLarge));
 			bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.error_image);						
 		}
@@ -488,7 +488,6 @@ public class ImagePager extends View implements Animator.Animable {
 			// setImageMatrix(matrix);
 
 		}
-
 	}
 
 	void scaleNextBitmap() {
@@ -541,8 +540,12 @@ public class ImagePager extends View implements Animator.Animable {
 				mScaleFactor = minScale / origScale;
 			}
 
-			matrix.postScale(mScaleFactor, mScaleFactor, detector.getFocusX(),
-					detector.getFocusY());
+			matrix.postScale(
+					mScaleFactor,
+					mScaleFactor,
+					detector.getFocusX(),
+					detector.getFocusY()
+			);
 
 			fixPosition();
 
@@ -714,7 +717,7 @@ public class ImagePager extends View implements Animator.Animable {
 	/**
 	 * Waits for a draw
 	 * 
-	 * @param max
+	 * @param timeout
 	 *            time to wait for draw (ms)
 	 * @throws InterruptedException
 	 */

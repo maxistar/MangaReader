@@ -55,7 +55,7 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
         	String key = adapter.getSettingsKey();
         	Preference m = this.findPreference(key);
         	m.setTitle(adapter.getName());
-        	m.setSummary(adapter.getServerAddress()+" ("+adapter.getLanguage()+")");
+        	m.setSummary(adapter.getServerAddress() + " ("+adapter.getLanguage() + ")");
         }
 		//get default value for count of files
 		//mCountOfFilesToRemember = this.findPreference("count_of_files_to_remember");
@@ -89,5 +89,4 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 		}
 		return super.onKeyDown(keyCode, event);
 	}
- 
 }

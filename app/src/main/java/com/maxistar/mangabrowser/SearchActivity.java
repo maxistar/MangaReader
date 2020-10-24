@@ -94,19 +94,18 @@ public class SearchActivity extends ListActivity {
 		
 		if (savedInstanceState!=null){
         	restoreState(savedInstanceState);
-        }
-        else {
+        } else {
         	initState();
         }
 
-		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT); // You might want to tweak these to WRAP_CONTENT
+		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+				LayoutParams.MATCH_PARENT,
+				LayoutParams.WRAP_CONTENT
+		); // You might want to tweak these to WRAP_CONTENT
 	    lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-
-	    
-	    	    
 	}
 	
-	void restoreState(Bundle state){
+	void restoreState(Bundle state) {
         String term = state.getString("term");
         text.setText(term);
         mData = (ArrayList<ListItem>) state.getSerializable("items");
@@ -114,8 +113,7 @@ public class SearchActivity extends ListActivity {
             empty_text.setText(l(R.string.Loading_));
             button.setEnabled(false);
             text.setEnabled(false);
-        }
-        else {
+        } else {
         	empty_text.setText(l(R.string.List_is_empty));
         	button.setEnabled(true);
         	text.setEnabled(true);
@@ -124,15 +122,15 @@ public class SearchActivity extends ListActivity {
     }
 	
 	@Override
-	protected void onPause(){
+	protected void onPause() {
 		super.onPause();
-		if (task!=null) task.setOwner(null);
+		if (task != null) task.setOwner(null);
 	}
 
 	@Override
-	protected void onResume(){
+	protected void onResume() {
 		super.onResume();
-		if (task!=null) task.setOwner(this);
+		if (task != null) task.setOwner(this);
 	}
 
 
@@ -141,13 +139,12 @@ public class SearchActivity extends ListActivity {
 		super.onDestroy();
 	}
 	
-    void initState(){
+    void initState() {
     	SearchCache cache = SearchCache.getCachedItems(getApplicationContext());
-    	if (cache!=null){
+    	if (cache != null) {
     		mData = cache.items;
     		text.setText(cache.term);
-    	}
-    	else {
+    	} else {
     		mData = new ArrayList<ListItem>();
     	}
         mAdapter.notifyDataSetChanged();
@@ -156,11 +153,11 @@ public class SearchActivity extends ListActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         String term = text.getText().toString();
-        outState.putString("term",term);
-        outState.putSerializable("items",mData);
+        outState.putString("term", term);
+        outState.putSerializable("items", mData);
     }
 	
-	protected void doSearch(){
+	protected void doSearch() {
 		task = new SearchTask();
 		task.setOwner(this);
 		task.execute(text.getText().toString());
@@ -168,10 +165,12 @@ public class SearchActivity extends ListActivity {
 	
 	
 	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v,
-			ContextMenuInfo menuInfo) {
+	public void onCreateContextMenu(
+			ContextMenu menu,
+			View v,
+			ContextMenuInfo menuInfo
+	) {
 		getMenuInflater().inflate(R.menu.activity_search_context, menu);
-	
 	}	
 	
 	@Override
@@ -195,7 +194,7 @@ public class SearchActivity extends ListActivity {
 	}
 	
 
-	void showToast(String msg){
+	void showToast(String msg) {
 		Toast.makeText(this.getApplicationContext(), msg, Toast.LENGTH_LONG).show();
 	}
 	
@@ -206,7 +205,7 @@ public class SearchActivity extends ListActivity {
 		getMenuInflater().inflate(R.menu.activity_search, menu);
 		return true;
 	}
-*/
+	*/
 	
 	private class MyCustomAdapter extends BaseAdapter {
 		 
@@ -264,8 +263,7 @@ public class SearchActivity extends ListActivity {
             if (convertView == null) {
             	if (item.type == TYPE_ITEM){
             		convertView = mInflater.inflate(R.layout.search_item, null);
-            	}
-            	else {
+            	} else {
             		convertView = mInflater.inflate(R.layout.search_separator, null);
             	}
                 //holder = new ViewHolder();
@@ -275,24 +273,22 @@ public class SearchActivity extends ListActivity {
                 //holder = (ViewHolder)convertView.getTag();
             }
             //holder.textView.setText(this.getItem(position));
-        	if (item.type == TYPE_ITEM){
+        	if (item.type == TYPE_ITEM) {
         		MangaItem item1 = mData.get(position).item;
         		((TextView)convertView.findViewById(R.id.text)).setText(item1.name);
         		
         		ImageView view = (ImageView)convertView.findViewById(R.id.favorites);
         		convertView.setTag(item1); //just in order simpler access
-        		if (MangaUtils.isItemFavorited(SearchActivity.this.getApplicationContext(),item1)){
+        		if (MangaUtils.isItemFavorited(SearchActivity.this.getApplicationContext(),item1)) {
         			view.setImageResource(R.drawable.favorited);
-        		}
-        		else {
+        		} else {
         			view.setImageResource(R.drawable.unfavorited);
         		}
         		view.setTag(item1);
         		//MangaUtils.setPreviewImage((ImageView)convertView.findViewById(R.id.preview),item1.thumnail_url, this);
-        		if (item1.thumnail_url!=null){
+        		if (item1.thumnail_url!=null) {
         			imageloader.displayImage(item1.thumnail_url, (ImageView)convertView.findViewById(R.id.preview));
-        		}
-            	else {
+        		} else {
             		((ImageView)convertView.findViewById(R.id.preview)).setImageResource(R.drawable.mangaloading);
             	}
         		//view.setI
@@ -306,17 +302,13 @@ public class SearchActivity extends ListActivity {
 						if (MangaUtils.isItemFavorited(SearchActivity.this.getApplicationContext(),item1)){
 							MangaUtils.removeFavorite(SearchActivity.this.getApplicationContext(),item1);
 							iv.setImageResource(R.drawable.unfavorited);
-						}
-						else {
+						} else {
 							MangaUtils.addFavorite(SearchActivity.this.getApplicationContext(),item1);
 							iv.setImageResource(R.drawable.favorited);							
 						}
 					}
         		});
-        		
-        		
-        	}
-        	else {
+        	} else {
                 ((TextView)convertView.findViewById(R.id.text)).setText(item.name);        		
                 ((TextView)convertView.findViewById(R.id.lang)).setText(item.lang);        		
         	}
@@ -350,16 +342,15 @@ public class SearchActivity extends ListActivity {
         	List<BaseSearchAdapter> adapters = BaseSearchAdapter.getSearchAdapters(owner.getApplicationContext());
         	
         	for(BaseSearchAdapter adapter: adapters){
-        		if (owner==null) continue;
+        		if (owner == null) continue;
         		SearchResult result = adapter.search(text,0);
-        		if (null!=result && result.items.size()>0){
-        			owner.mAdapter.addSeparator(adapter.getName(),adapter.getLanguage());
+        		if (null != result && result.items.size() > 0) {
+        			owner.mAdapter.addSeparator(adapter.getName(), adapter.getLanguage());
         			Iterator<MangaItem> it = result.items.iterator();
-        			while(it.hasNext()){
+        			while (it.hasNext()) {
         				MangaItem item = it.next();
         				owner.mAdapter.addItem(item);
         			}
-        			//owner.mAdapter.notifyDataSetChanged();
         		}
         	}
             return null;
@@ -368,7 +359,7 @@ public class SearchActivity extends ListActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            if (owner==null) return;
+            if (owner == null) return;
             owner.empty_text.setText(owner.l(R.string.Loading_));
             owner.mData.clear();
             owner.text.setEnabled(false);
@@ -379,13 +370,17 @@ public class SearchActivity extends ListActivity {
         @Override
         protected void onPostExecute(String result) {
         	owner.mAdapter.notifyDataSetChanged();
-        	if (owner==null) return;
+        	if (owner == null) return;
             owner.empty_text.setText(owner.l(R.string.List_is_empty));
             owner.text.setEnabled(true);
             owner.button.setEnabled(true);
             SearchActivity.task = null; //we have done
             
-            SearchCache.saveCache(owner.mData, owner.text.getText().toString(), owner.getApplicationContext());
+            SearchCache.saveCache(
+            		owner.mData,
+					owner.text.getText().toString(),
+					owner.getApplicationContext()
+			);
         }
 
         @Override
@@ -403,7 +398,7 @@ public class SearchActivity extends ListActivity {
     	ArrayList<ListItem> items = null;
     	String term = "";
     	
-    	static void saveCache(ArrayList<ListItem> mData, String term, Context context){
+    	static void saveCache(ArrayList<ListItem> mData, String term, Context context) {
         	SearchCache cache = new SearchCache();
         	cache.items = mData;
         	cache.term = term;
@@ -411,7 +406,7 @@ public class SearchActivity extends ListActivity {
     		String filename = "search";
     		FileOutputStream fos;
     		try {
-    			fos = context.openFileOutput(filename,Context.MODE_PRIVATE);
+    			fos = context.openFileOutput(filename, Context.MODE_PRIVATE);
     			ObjectOutputStream objectOut = new ObjectOutputStream(fos);
     			objectOut.writeObject(cache);
     		} catch (FileNotFoundException e) {
@@ -423,7 +418,7 @@ public class SearchActivity extends ListActivity {
     		}
     	}
 
-    	static SearchCache getCachedItems(Context context){
+    	static SearchCache getCachedItems(Context context) {
     		String filename = "search";
     		try {
     			FileInputStream fis = context.getApplicationContext().openFileInput(filename);
@@ -441,12 +436,10 @@ public class SearchActivity extends ListActivity {
     		} catch (ClassNotFoundException e) {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
-    		}
-    		catch (Exception e) {
+    		} catch (Exception e) {
     			e.printStackTrace();
     		}
     		return null;
     	}
     }
-    
 }

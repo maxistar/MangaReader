@@ -1,6 +1,7 @@
 package com.maxistar.mangabrowser;
 
-public class MStrings {
+public class MStrings
+{
 	static final String EMPTY = "";
 	static final String MANGA = "manga";
 	static final String ITEM = "item";

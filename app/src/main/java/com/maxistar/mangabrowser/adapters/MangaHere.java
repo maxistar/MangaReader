@@ -27,7 +27,7 @@ public class MangaHere extends BaseSearchAdapter {
 		language = "en";		
 	}
 	
-	public SearchResult search(String word, int page){
+	public SearchResult search(String word, int page) {
 		//http://www.mangaeden.com/en-directory/?title=Bleach&author=&artist=&releasedType=0&released=
 		SearchResult result = new SearchResult();
 		try {
@@ -45,8 +45,12 @@ public class MangaHere extends BaseSearchAdapter {
 
 			while (m.find()) {
 				
-				MangaItem item = new MangaItem(m.group(2),
-						m.group(1), 0, TYPE_MANGA_HERE);
+				MangaItem item = new MangaItem(
+						m.group(2),
+						m.group(1),
+						0,
+						TYPE_MANGA_HERE
+				);
 				item.thumnail_url = "";
 				result.addItem(item);
 			}
@@ -58,7 +62,7 @@ public class MangaHere extends BaseSearchAdapter {
 		return result;
 	}
 	
-	public ArrayList<VolumeItem> getVolumes(MangaItem item){
+	public ArrayList<VolumeItem> getVolumes(MangaItem item) {
 		ArrayList<VolumeItem> result = new ArrayList<VolumeItem>();
 		try {
 			String results = this.getGetData(item.url);

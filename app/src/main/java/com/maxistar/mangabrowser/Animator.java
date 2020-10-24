@@ -51,8 +51,7 @@ public class Animator extends Thread {
 						if(view.waitForDraw(32)) { // 30Htz
 							break;
 						}
-					}
-					catch (InterruptedException ignore) {
+					} catch (InterruptedException ignore) {
 						active = false;
 					}
 				}

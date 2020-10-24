@@ -74,7 +74,7 @@ public class MangaUtils {
 	}
 
 	static void saveFavorites(Context context) {
-		TreeMap<String, MangaItem> favorites = MangaUtils
+		TreeMap <String, MangaItem> favorites = MangaUtils
 				.getFavorites(context);
 		FileOutputStream fos;
 		try {
@@ -91,11 +91,11 @@ public class MangaUtils {
 	}
 
 	static List<MangaItem> getFavoritesList(Context context) {
-		ArrayList<MangaItem> list = new ArrayList<MangaItem>();
-		TreeMap<String, MangaItem> favorites = MangaUtils
+		ArrayList <MangaItem> list = new ArrayList<MangaItem>();
+		TreeMap <String, MangaItem> favorites = MangaUtils
 				.getFavorites(context);
 
-		for (Map.Entry<String, MangaItem> entry : favorites.entrySet()) {
+		for (Map.Entry <String, MangaItem> entry : favorites.entrySet()) {
 			MangaItem item = entry.getValue();
 			list.add(item);
 		}
@@ -108,7 +108,7 @@ public class MangaUtils {
 
 	static boolean isItemFavorited(Context context, MangaItem item) {
 		String key = item.getFavoritesKey();
-		TreeMap<String, MangaItem> favorites = MangaUtils
+		TreeMap <String, MangaItem> favorites = MangaUtils
 				.getFavorites(context);
 		return favorites.containsKey(key);
 	}
@@ -116,7 +116,8 @@ public class MangaUtils {
 	static boolean isVolumeDownloaded(MangaItem manga,
 			VolumeItem item) {
 		String foldername = Environment.getExternalStorageDirectory()
-				+ MStrings.SLASH+MStrings.MANGABROWSER+MStrings.SLASH + MangaUtils.getFolderName(manga.manga_type)
+				+ MStrings.SLASH+MStrings.MANGABROWSER + MStrings.SLASH
+				+ MangaUtils.getFolderName(manga.manga_type)
 				+ MStrings.SLASH + manga.getFolderName() + MStrings.SLASH + item.getFolderName();
 
 		// common name
@@ -129,7 +130,7 @@ public class MangaUtils {
 
 	static void addFavorite(Context context, MangaItem item) {
 		String key = item.getFavoritesKey();
-		TreeMap<String, MangaItem> favorites = MangaUtils
+		TreeMap <String, MangaItem> favorites = MangaUtils
 				.getFavorites(context);
 		favorites.put(key, item);
 		MangaUtils.saveFavorites(context);
@@ -137,7 +138,7 @@ public class MangaUtils {
 
 	static void removeFavorite(Context context, MangaItem item) {
 		String key = item.getFavoritesKey();
-		TreeMap<String, MangaItem> favorites = MangaUtils
+		TreeMap <String, MangaItem> favorites = MangaUtils
 				.getFavorites(context);
 		favorites.remove(key);
 		MangaUtils.saveFavorites(context);
@@ -164,22 +165,20 @@ public class MangaUtils {
 	
     public static void CopyStream(InputStream is, OutputStream os)
     {
-        final int buffer_size=1024;
-        try
-        {
-            byte[] bytes=new byte[buffer_size];
-            for(;;)
-            {
-              int count=is.read(bytes, 0, buffer_size);
-              if(count==-1)
+        final int buffer_size = 1024;
+        try {
+            byte[] bytes = new byte[buffer_size];
+            for(;;) {
+              int count = is.read(bytes, 0, buffer_size);
+              if(count == -1)
                   break;
               os.write(bytes, 0, count);
             }
         }
-        catch(Exception ex){}
+        catch(Exception ex) {}
     }
     
-    static void deleteFolder(File folder){
+    static void deleteFolder(File folder) {
     	//
     	for (File child : folder.listFiles()) {
 			child.delete();

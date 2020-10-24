@@ -3,7 +3,8 @@ package com.maxistar.mangabrowser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchResult {
+public class SearchResult
+{
 	List <MangaItem> items;
 	int total_count = 0; 
 	public SearchResult() {

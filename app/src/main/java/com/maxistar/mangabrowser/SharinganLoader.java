@@ -15,7 +15,6 @@ public class SharinganLoader extends View implements Animator.Animable {
 	protected void onAttachedToWindow() {
 		animator = new Animator(this, MStrings.IMAGE_PAGER_ANIMATOR);
 		animator.start();
-
 		super.onAttachedToWindow();
 	}
 
@@ -26,8 +25,6 @@ public class SharinganLoader extends View implements Animator.Animable {
 	
 	class CircrleFraction extends Fraction {
 		boolean red = true;
-		
-		
 	}
 	
 	class BagelFraction extends Fraction {

@@ -14,15 +14,13 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.util.Log;
-
 import com.maxistar.mangabrowser.MangaItem;
 import com.maxistar.mangabrowser.SearchResult;
 import com.maxistar.mangabrowser.VolumeItem;
 
 public class Mangable extends BaseSearchAdapter {
 	
-	void init(){
+	void init() {
 		server_address = "http://mangable.com";
 		settings_key = "source_mangable";
 		name = "Mangable";
@@ -87,8 +85,11 @@ public class Mangable extends BaseSearchAdapter {
 
 
 			while (m.find()) {
-				VolumeItem item1 = new VolumeItem(m.group(2), m.group(1),
-						TYPE_MANGABLE);
+				VolumeItem item1 = new VolumeItem(
+						m.group(2),
+						m.group(1),
+						TYPE_MANGABLE
+				);
 				result.add(item1);
 			}
 
@@ -218,7 +219,6 @@ public class Mangable extends BaseSearchAdapter {
 				//}
 				//num++;
 			}
-
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

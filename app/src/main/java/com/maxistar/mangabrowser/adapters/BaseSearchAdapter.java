@@ -32,7 +32,7 @@ import com.maxistar.mangabrowser.SearchResult;
 import com.maxistar.mangabrowser.VolumeItem;
 
 abstract public class BaseSearchAdapter {
-	public static final int BUFFER_SIZE_8 = 8*1024;
+	public static final int BUFFER_SIZE_8 = 8 * 1024;
 	public static final int TYPE_MANGA_READER = 0;
 	public static final int TYPE_MANGABLE = 1;
 	public static final int TYPE_ADULT_MANGA = 2;
@@ -73,10 +73,10 @@ abstract public class BaseSearchAdapter {
 	
 	abstract public ArrayList<String> getImageUrls(VolumeItem item);
 	
-	public void downloadImages(VolumeItem item, String foldername){
+	public void downloadImages(VolumeItem item, String foldername) {
 		int num = 1;
 		ArrayList<String> list = this.getImageUrls(item); 
-		for (String addr : list) {
+		for (String addr: list) {
 			try {
 				downloadFile(addr, num, foldername);
 			} catch (Exception e) {
@@ -91,8 +91,7 @@ abstract public class BaseSearchAdapter {
 
 		}	
 	}
-	
-	
+
 	String getGetData(String address) throws Exception {
 		if (address.indexOf("http") != 0 && address.indexOf("//") != 0) {
 			address = this.server_address + address;
@@ -105,7 +104,7 @@ abstract public class BaseSearchAdapter {
 		InputStream is = response.getEntity().getContent();
 
 		StringBuilder data = new StringBuilder();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(is),BUFFER_SIZE_8);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is), BUFFER_SIZE_8);
 		String line = reader.readLine();
 		while (line != null) {
 			data.append(line);
@@ -114,8 +113,10 @@ abstract public class BaseSearchAdapter {
 		return data.toString();
 	}
 	
-	String getPostData(String address, List<NameValuePair> postParams)
-			throws Exception {
+	String getPostData(
+			String address,
+			List<NameValuePair> postParams
+	) throws Exception {
 		HttpClient client = new DefaultHttpClient();
 		client.getParams().setParameter("http.protocol.content-charset","UTF-8");
 
@@ -132,7 +133,7 @@ abstract public class BaseSearchAdapter {
 		InputStream is = response.getEntity().getContent();
 
 		StringBuilder data = new StringBuilder();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(is),BUFFER_SIZE_8);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is), BUFFER_SIZE_8);
 		String line = reader.readLine();
 		while (line != null) {
 			data.append(line);
@@ -155,36 +156,36 @@ abstract public class BaseSearchAdapter {
 	 * returns available search adapters
 	 * @return
 	 */
-	static public List<BaseSearchAdapter> getSearchAdapters(Context context){
+	static public List<BaseSearchAdapter> getSearchAdapters(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         ArrayList<BaseSearchAdapter> list = new ArrayList<BaseSearchAdapter>();
         List<BaseSearchAdapter> all = BaseSearchAdapter.getAvailableAdapters();
-        for(BaseSearchAdapter adapter:all){
+        for (BaseSearchAdapter adapter: all) {
         	boolean used = sharedPreferences.getBoolean(adapter.getSettingsKey(), true);
-        	if (used){
+        	if (used) {
         		list.add(adapter);
         	}
         }
 		return list;
 	}
 
-	static public String getFolderName(int type){
+	static public String getFolderName(int type) {
 		switch (type) {
-		case BaseSearchAdapter.TYPE_MANGA_READER:
-			return MStrings.MANGAREADER;
-		case BaseSearchAdapter.TYPE_MANGABLE:
-			return MStrings.MANGABLE;
-		case BaseSearchAdapter.TYPE_ADULT_MANGA:
-			return MStrings.ADULTMANGA;
-		case BaseSearchAdapter.TYPE_MANGA_EDEN:
-			return MStrings.MANGAEDEN;
-		case BaseSearchAdapter.TYPE_MANGA_HERE:
-			return MStrings.MANGAHERE;
-		case BaseSearchAdapter.TYPE_READ_MANGA_ME:
-			return MStrings.READMANGAME;
-		default:
-			return MStrings.UNKNOWN;
+			case BaseSearchAdapter.TYPE_MANGA_READER:
+				return MStrings.MANGAREADER;
+			case BaseSearchAdapter.TYPE_MANGABLE:
+				return MStrings.MANGABLE;
+			case BaseSearchAdapter.TYPE_ADULT_MANGA:
+				return MStrings.ADULTMANGA;
+			case BaseSearchAdapter.TYPE_MANGA_EDEN:
+				return MStrings.MANGAEDEN;
+			case BaseSearchAdapter.TYPE_MANGA_HERE:
+				return MStrings.MANGAHERE;
+			case BaseSearchAdapter.TYPE_READ_MANGA_ME:
+				return MStrings.READMANGAME;
+			default:
+				return MStrings.UNKNOWN;
 		}
 	}
 	
@@ -192,7 +193,7 @@ abstract public class BaseSearchAdapter {
 	 * returns all search adapters
 	 * @return
 	 */
-	static public List<BaseSearchAdapter> getAvailableAdapters(){
+	static public List<BaseSearchAdapter> getAvailableAdapters() {
 		ArrayList<BaseSearchAdapter> list = new ArrayList<BaseSearchAdapter>();
 		list.add(new MangaReader());
 		list.add(new Mangable());
@@ -207,7 +208,7 @@ abstract public class BaseSearchAdapter {
 	 * returns adapter by code
 	 * @return
 	 */
-	static public BaseSearchAdapter getSearchAdapter(int code){
+	static public BaseSearchAdapter getSearchAdapter(int code) {
 		if (code == BaseSearchAdapter.TYPE_MANGA_READER) {
 			return new MangaReader();
 		}
@@ -285,5 +286,4 @@ abstract public class BaseSearchAdapter {
 		} while (try_num > 0);
 	}
 	*/
-	
 }
