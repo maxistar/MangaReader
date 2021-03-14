@@ -20,6 +20,8 @@ android {
         }
     }
     useLibrary 'org.apache.http.legacy'
+    useLibrary 'android.test.base'
+    useLibrary 'android.test.mock'
 }
 
 dependencies {
