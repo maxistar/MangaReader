@@ -10,6 +10,6 @@ package com.maxistar.mangabrowser;
  */
 public interface SimpleAnimationListener
 {
-	public void onZoom(float scale, float x, float y);
-	public void onComplete();
+    public void onZoom(float scale, float x, float y);
+    public void onComplete();
 }

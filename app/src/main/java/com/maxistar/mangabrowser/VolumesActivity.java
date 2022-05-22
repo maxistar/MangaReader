@@ -2,7 +2,6 @@ package com.maxistar.mangabrowser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -28,360 +27,349 @@ import android.widget.TextView;
 
 import com.maxistar.mangabrowser.adapters.BaseSearchAdapter;
 
-public class VolumesActivity extends ListActivity implements
-		MangaLoader.OnProgressUpdateListener {
-	MangaItem item;
+public class VolumesActivity
+       extends ListActivity
+       implements MangaLoader.OnProgressUpdateListener {
 
-	static boolean update_flag = false;
+    MangaItem item;
 
-	private VolumesAdapter mAdapter;
-	private ArrayList<VolumeItem> mData;
+    static boolean update_flag = false;
 
-	private Map<String, ImageView> itemViews = new HashMap<String, ImageView>();
-	private Map<ImageView, String> viewItems = new HashMap<ImageView, String>();
+    private VolumesAdapter mAdapter;
+    private ArrayList<VolumeItem> mData;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		item = (MangaItem) this.getIntent().getExtras()
-				.getSerializable(MStrings.MANGA);
-		setContentView(R.layout.activity_volumes);
+    private final Map<String, ImageView> itemViews = new HashMap<String, ImageView>();
+    private final Map<ImageView, String> viewItems = new HashMap<ImageView, String>();
 
-		ListView lv = getListView();
-		lv.setTextFilterEnabled(true);
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				//VolumeItem item1 = mData.get(position);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        item = (MangaItem) this.getIntent().getExtras()
+                .getSerializable(MStrings.MANGA);
+        setContentView(R.layout.activity_volumes);
 
-				Intent intent = new Intent(
-						VolumesActivity.this,
-						VolumeActivity.class
-				);
-				intent.putExtra(MStrings.ITEM, position);
-				intent.putExtra(MStrings.MANGA, item);
-				startActivity(intent);
-			}
-		});
-		this.registerForContextMenu(lv);
+        ListView lv = getListView();
+        lv.setTextFilterEnabled(true);
+        lv.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                    int position, long id) {
+                //VolumeItem item1 = mData.get(position);
 
-		MangaLoader.setProgressListener(this);
-	}
-	
-	void copyCachedDataToList() {
-		VolumesCache cache = VolumesCache.getCachedItems(
-				item,
-				getApplicationContext()
-		);
-		if (cache == null) return; //nothing to copy
-		TreeMap<String, VolumeItem> items_by_url = new TreeMap<String, VolumeItem>();
-		for (VolumeItem item: cache.items) {
-			items_by_url.put(item.url, item);
-		}
-		for (VolumeItem item: mData) {
-			if (!items_by_url.containsKey(item.url)) continue; //nothing to copy
-			VolumeItem old_item = items_by_url.get(item.url);
-			item.read_flag = old_item.read_flag;
-			item.page_num = old_item.page_num;
-		}
-		//good job!
-	}
+                Intent intent = new Intent(
+                        VolumesActivity.this,
+                        VolumeActivity.class
+                );
+                intent.putExtra(MStrings.ITEM, position);
+                intent.putExtra(MStrings.MANGA, item);
+                startActivity(intent);
+            }
+        });
+        this.registerForContextMenu(lv);
 
-	void saveCache() {
-		VolumesCache.saveCache(item, mData, getApplicationContext());
-	}
+        MangaLoader.setProgressListener(this);
+    }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
+    void copyCachedDataToList() {
+        VolumesCache cache = VolumesCache.getCachedItems(
+                item,
+                getApplicationContext()
+        );
+        if (cache == null) return; //nothing to copy
+        TreeMap<String, VolumeItem> items_by_url = new TreeMap<String, VolumeItem>();
+        for (VolumeItem item: cache.items) {
+            items_by_url.put(item.url, item);
+        }
+        for (VolumeItem item: mData) {
+            if (!items_by_url.containsKey(item.url)) continue; //nothing to copy
+            VolumeItem old_item = items_by_url.get(item.url);
+            item.read_flag = old_item.read_flag;
+            item.page_num = old_item.page_num;
+        }
+    }
 
-		VolumesCache cache = VolumesCache.getCachedItems(
-				item,
-				getApplicationContext()
-		);
-		if (cache == null || (cache != null && cache.info == null)) {
-			mData = new ArrayList<VolumeItem>();
-			mAdapter = new VolumesAdapter();
-			this.setListAdapter(mAdapter);
-			LoadTask task = new LoadTask();
-			task.execute();
-		} else {
-			mData = cache.items;
-			mAdapter = new VolumesAdapter();
-			this.setListAdapter(mAdapter);
-		}
+    void saveCache() {
+        VolumesCache.saveCache(item, mData, getApplicationContext());
+    }
 
-		this.mAdapter.notifyDataSetChanged();
-	}
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		MangaLoader.removeProgressListener(this);
-	}
+        VolumesCache cache = VolumesCache.getCachedItems(
+                item,
+                getApplicationContext()
+        );
+        if (cache == null || cache.info == null) {
+            mData = new ArrayList<VolumeItem>();
+            mAdapter = new VolumesAdapter();
+            this.setListAdapter(mAdapter);
+            LoadTask task = new LoadTask();
+            task.execute();
+        } else {
+            mData = cache.items;
+            mAdapter = new VolumesAdapter();
+            this.setListAdapter(mAdapter);
+        }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_volumes, menu);
-		return true;
-	}
+        this.mAdapter.notifyDataSetChanged();
+    }
 
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		if (MangaUtils.isItemFavorited(getApplicationContext(), item)) {
-			menu.findItem(R.id.add_to_favorites).setVisible(false);
-			menu.findItem(R.id.remove_from_favorites).setVisible(true);
-		} else {
-			menu.findItem(R.id.add_to_favorites).setVisible(true);
-			menu.findItem(R.id.remove_from_favorites).setVisible(false);
-		}
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MangaLoader.removeProgressListener(this);
+    }
 
-		if (this.mData.size() > 0) {
-			menu.findItem(R.id.menu_download_all).setVisible(true);
-		} else {
-			menu.findItem(R.id.menu_download_all).setVisible(false);
-		}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_volumes, menu);
+        return true;
+    }
 
-		return true;
-	}
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (MangaUtils.isItemFavorited(getApplicationContext(), item)) {
+            menu.findItem(R.id.add_to_favorites).setVisible(false);
+            menu.findItem(R.id.remove_from_favorites).setVisible(true);
+        } else {
+            menu.findItem(R.id.add_to_favorites).setVisible(true);
+            menu.findItem(R.id.remove_from_favorites).setVisible(false);
+        }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.menu_refresh_volumes:
-			mData.clear();
-			mAdapter.notifyDataSetChanged();
+        menu.findItem(R.id.menu_download_all).setVisible(this.mData.size() > 0);
 
-			LoadTask task = new LoadTask();
-			task.execute();
-			return true;
-		case R.id.add_to_favorites:
-			MangaUtils.addFavorite(getApplicationContext(), this.item);
-			return true;
-		case R.id.remove_from_favorites:
-			MangaUtils.removeFavorite(getApplicationContext(), this.item);
-			return true;
-		case R.id.menu_download_all:
-			Iterator<VolumeItem> it = this.mData.iterator();
-			while (it.hasNext()) {
-				VolumeItem item1 = it.next();
-				MangaLoader.downloadManga(this.item, item1);
-			}
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+        return true;
+    }
 
-	@Override
-	public void onCreateContextMenu(
-			ContextMenu menu,
-			View v,
-			ContextMenuInfo menuInfo
-	) {
-		getMenuInflater().inflate(R.menu.activity_volumes_context, menu);
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.menu_refresh_volumes:
+            mData.clear();
+            mAdapter.notifyDataSetChanged();
 
-	@Override
-	public boolean onContextItemSelected(MenuItem item2) {
-		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item2
-				.getMenuInfo();
-		VolumeItem item1 = mData.get(info.position);
+            LoadTask task = new LoadTask();
+            task.execute();
+            return true;
+        case R.id.add_to_favorites:
+            MangaUtils.addFavorite(getApplicationContext(), this.item);
+            return true;
+        case R.id.remove_from_favorites:
+            MangaUtils.removeFavorite(getApplicationContext(), this.item);
+            return true;
+        case R.id.menu_download_all:
+            for (VolumeItem item1 : this.mData) {
+                MangaLoader.downloadManga(this.item, item1);
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-		switch (item2.getItemId()) {
-			case R.id.menu_download_volume:
-				MangaLoader.downloadManga(item, item1);
-				updateImageForItem(item1);
-				return true;
-			case R.id.menu_mark_read:
-				item1.read_flag = true;
-				saveCache();
-				this.mAdapter.notifyDataSetChanged();
-				return true;
-			case R.id.menu_mark_unread:
-				item1.read_flag = false;
-				saveCache();
-				this.mAdapter.notifyDataSetChanged();
-				return true;
-		}
-		return super.onContextItemSelected(item2);
-	}
+    @Override
+    public void onCreateContextMenu(
+            ContextMenu menu,
+            View v,
+            ContextMenuInfo menuInfo
+    ) {
+        getMenuInflater().inflate(R.menu.activity_volumes_context, menu);
+    }
 
-	void updateImageForItem(VolumeItem v) {
-		if (!this.itemViews.containsKey(v.getUniqueKey())) {
-			return;
-		}
-		ImageView imageView = this.itemViews.get(v.getUniqueKey());
-		if (!this.viewItems.containsKey(imageView)) {
-			return; // just to make sure
-		}
+    @Override
+    public boolean onContextItemSelected(MenuItem item2) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item2
+                .getMenuInfo();
+        VolumeItem item1 = mData.get(info.position);
 
-		String v2 = this.viewItems.get(imageView);
-		if (!v2.equals(v.getUniqueKey())) {
-			return; // item recycled
-		}
+        switch (item2.getItemId()) {
+            case R.id.menu_download_volume:
+                MangaLoader.downloadManga(item, item1);
+                updateImageForItem(item1);
+                return true;
+            case R.id.menu_mark_read:
+                item1.read_flag = true;
+                saveCache();
+                this.mAdapter.notifyDataSetChanged();
+                return true;
+            case R.id.menu_mark_unread:
+                item1.read_flag = false;
+                saveCache();
+                this.mAdapter.notifyDataSetChanged();
+                return true;
+        }
+        return super.onContextItemSelected(item2);
+    }
 
-		// this.itemViews.get(item.get)
-		this.displayImage(item, v, imageView);
-	}
+    void updateImageForItem(VolumeItem v) {
+        if (!this.itemViews.containsKey(v.getUniqueKey())) {
+            return;
+        }
+        ImageView imageView = this.itemViews.get(v.getUniqueKey());
+        if (!this.viewItems.containsKey(imageView)) {
+            return; // just to make sure
+        }
 
-	private class VolumesAdapter extends BaseAdapter {
+        String v2 = this.viewItems.get(imageView);
+        if (!v2.equals(v.getUniqueKey())) {
+            return; // item recycled
+        }
 
-		private LayoutInflater mInflater;
+        this.displayImage(item, v, imageView);
+    }
 
-		public VolumesAdapter() {
-			mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		}
+    private class VolumesAdapter extends BaseAdapter {
 
-		@Override
-		public int getCount() {
-			return mData.size();
-		}
+        private LayoutInflater mInflater;
 
-		@Override
-		public VolumeItem getItem(int position) {
-			return mData.get(position);
-		}
+        public VolumesAdapter() {
+            mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
 
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
+        @Override
+        public int getCount() {
+            return mData.size();
+        }
 
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			if (convertView == null) {
-				convertView = mInflater.inflate(R.layout.volume_item, null);
-			} else {
-			}
+        @Override
+        public VolumeItem getItem(int position) {
+            return mData.get(position);
+        }
 
-			VolumeItem it = mData.get(position);
-			TextView tv = ((TextView) convertView.findViewById(R.id.text));
-			if (it.read_flag) {
-				tv.setText(it.name);
-			} else {
-				tv.setText(Html.fromHtml("<b>" + it.name + "</b>"));
-			}
-			// tv.setW
-			ImageView view = (ImageView) convertView
-					.findViewById(R.id.favorites);
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
 
-			displayImage(item, mData.get(position), view);
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = mInflater.inflate(R.layout.volume_item, null);
+            }
 
-			return convertView;
-		}
+            VolumeItem it = mData.get(position);
+            TextView tv = ((TextView) convertView.findViewById(R.id.text));
+            if (it.read_flag) {
+                tv.setText(it.name);
+            } else {
+                tv.setText(Html.fromHtml("<b>" + it.name + "</b>"));
+            }
 
-	}
+            ImageView view = (ImageView) convertView
+                    .findViewById(R.id.favorites);
 
-	private void displayImage(
-			MangaItem manga,
-			VolumeItem volume,
-			ImageView imageView
-	) {
-		itemViews.put(volume.getUniqueKey(), imageView);
-		viewItems.put(imageView, volume.getUniqueKey());
+            displayImage(item, mData.get(position), view);
 
-		int status = MangaLoader.getVolumeStatus(manga, volume);
-		if (status == MangaLoader.MANGA_LOADED) {
-			imageView.setImageResource(R.drawable.stored);
-		} else if (status == MangaLoader.MANGA_LOADING) {
-			imageView.setImageResource(R.drawable.download);
-		} else {
-			imageView.setImageResource(R.drawable.globe);
-		}
-	}
+            return convertView;
+        }
 
-	private class LoadTask extends AsyncTask<Void, String, String> {
-		// ProgressBar pb;
-		// ProgressBar pbar;
+    }
 
-		@Override
-		protected String doInBackground(Void... urls) {
-			// parse
-			BaseSearchAdapter adapter = BaseSearchAdapter
-					.getSearchAdapter(item.manga_type);
-			mData = adapter.getVolumes(item);
-			
-			return null;
-		}
+    private void displayImage(
+            MangaItem manga,
+            VolumeItem volume,
+            ImageView imageView
+    ) {
+        itemViews.put(volume.getUniqueKey(), imageView);
+        viewItems.put(imageView, volume.getUniqueKey());
 
-		@Override
-		protected void onPreExecute() {
+        int status = MangaLoader.getVolumeStatus(manga, volume);
+        if (status == MangaLoader.MANGA_LOADED) {
+            imageView.setImageResource(R.drawable.stored);
+        } else if (status == MangaLoader.MANGA_LOADING) {
+            imageView.setImageResource(R.drawable.download);
+        } else {
+            imageView.setImageResource(R.drawable.globe);
+        }
+    }
 
-			super.onPreExecute();
-			TextView text = (TextView) findViewById(android.R.id.empty);
-			text.setText(l(R.string.Loading_));
-			mData.clear();
-			mAdapter.notifyDataSetChanged();
+    private class LoadTask extends AsyncTask<Void, String, String> {
 
-		}
+        @Override
+        protected String doInBackground(Void... urls) {
+            // parse
+            BaseSearchAdapter adapter = BaseSearchAdapter
+                    .getSearchAdapter(item.manga_type);
+            mData = adapter.getVolumes(item);
 
-		@Override
-		protected void onPostExecute(String result) {
-			TextView text = (TextView) findViewById(android.R.id.empty);
-			text.setText(l(R.string.List_is_empty));
-			mAdapter.notifyDataSetChanged();
-			copyCachedDataToList();
-			saveCache();
-		}
+            return null;
+        }
 
-		@Override
-		protected void onProgressUpdate(String... values) {
-			super.onProgressUpdate(values);
-		}
-	}
+        @Override
+        protected void onPreExecute() {
 
-	@Override
-	public void onProgressUpdate(VolumeItem item, float progress) {
-		// TODO Auto-generated method stub
-	}
+            super.onPreExecute();
+            TextView text = (TextView) findViewById(android.R.id.empty);
+            text.setText(l(R.string.Loading_));
+            mData.clear();
+            mAdapter.notifyDataSetChanged();
 
-	@Override
-	public void onDownloadComplete(VolumeItem v) {
-		if (!this.itemViews.containsKey(v.getUniqueKey())) {
-			return;
-		}
-		ImageView imageView = this.itemViews.get(v.getUniqueKey());
-		if (!this.viewItems.containsKey(imageView)) {
-			return; // just to make sure
-		}
+        }
 
-		String v2 = this.viewItems.get(imageView);
-		if (!v2.equals(v.getUniqueKey())) {
-			return; // item recycled
-		}
+        @Override
+        protected void onPostExecute(String result) {
+            TextView text = (TextView) findViewById(android.R.id.empty);
+            text.setText(l(R.string.List_is_empty));
+            mAdapter.notifyDataSetChanged();
+            copyCachedDataToList();
+            saveCache();
+        }
 
-		// this.itemViews.get(item.get)
-		this.displayImage(item, v, imageView);
-	}
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+        }
+    }
 
-	String l(int id) {
-		return getApplicationContext().getResources().getString(id);
-	}
+    @Override
+    public void onProgressUpdate(VolumeItem item, float progress) {
+        // TODO Auto-generated method stub
+    }
 
-	@Override
-	public void onDownloadStarted(VolumeItem v) {
-		if (!this.itemViews.containsKey(v.getUniqueKey())) {
-			return;
-		}
-		ImageView imageView = this.itemViews.get(v.getUniqueKey());
-		if (!this.viewItems.containsKey(imageView)) {
-			return; // just to make sure
-		}
+    @Override
+    public void onDownloadComplete(VolumeItem v) {
+        if (!this.itemViews.containsKey(v.getUniqueKey())) {
+            return;
+        }
+        ImageView imageView = this.itemViews.get(v.getUniqueKey());
+        if (!this.viewItems.containsKey(imageView)) {
+            return; // just to make sure
+        }
 
-		String v2 = this.viewItems.get(imageView);
-		if (!v2.equals(v.getUniqueKey())) {
-			return; // item recycled
-		}
+        String v2 = this.viewItems.get(imageView);
+        if (!v2.equals(v.getUniqueKey())) {
+            return; // item recycled
+        }
 
-		// this.itemViews.get(item.get)
-		this.displayImage(item, v, imageView);
-	}
-	
-	@Override
-	public void onBackPressed() {
-		Intent intent = new Intent(this,
-			MainActivity.class);
-		startActivity(intent);
-	}
+        this.displayImage(item, v, imageView);
+    }
+
+    String l(int id) {
+        return getApplicationContext().getResources().getString(id);
+    }
+
+    @Override
+    public void onDownloadStarted(VolumeItem v) {
+        if (!this.itemViews.containsKey(v.getUniqueKey())) {
+            return;
+        }
+        ImageView imageView = this.itemViews.get(v.getUniqueKey());
+        if (!this.viewItems.containsKey(imageView)) {
+            return; // just to make sure
+        }
+
+        String v2 = this.viewItems.get(imageView);
+        if (!v2.equals(v.getUniqueKey())) {
+            return; // item recycled
+        }
+
+        this.displayImage(item, v, imageView);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,
+            MainActivity.class);
+        startActivity(intent);
+    }
 }

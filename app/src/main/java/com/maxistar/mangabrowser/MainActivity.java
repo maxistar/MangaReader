@@ -26,67 +26,66 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 public class MainActivity extends Activity {
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		//
-		Button button = (Button) this.findViewById(R.id.search);
-		button.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				Intent intent = new Intent(MainActivity.this,
-						SearchActivity.class);
-				startActivity(intent);
-			}
-		});
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        //
+        Button button = (Button) this.findViewById(R.id.search);
+        button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(MainActivity.this,
+                        SearchActivity.class);
+                startActivity(intent);
+            }
+        });
 
-		button = (Button) this.findViewById(R.id.favorites);
-		button.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				Intent intent = new Intent(MainActivity.this,
-						FavoritesActivity.class);
-				startActivity(intent);
-			}
-		});		
-		
-	}
+        button = (Button) this.findViewById(R.id.favorites);
+        button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(MainActivity.this,
+                        FavoritesActivity.class);
+                startActivity(intent);
+            }
+        });
 
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
-	}
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.menu_settings:
-			Intent intent = new Intent(MainActivity.this,
-					SettingsActivity.class);
-			startActivity(intent);
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-	
-	  @Override
-	  public void onResume() {
-	    super.onResume();
-	    
-	  }
 
-	  @Override
-	  public void onPause() {
-	    super.onPause();
-	  }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
 
-	  /** Called before the activity is destroyed. */
-	  @Override
-	  public void onDestroy() {
-	    super.onDestroy();
-	  }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_settings) {
+            Intent intent = new Intent(MainActivity.this,
+                    SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+      @Override
+      public void onResume() {
+        super.onResume();
+
+      }
+
+      @Override
+      public void onPause() {
+        super.onPause();
+      }
+
+      /** Called before the activity is destroyed. */
+      @Override
+      public void onDestroy() {
+        super.onDestroy();
+      }
 }
