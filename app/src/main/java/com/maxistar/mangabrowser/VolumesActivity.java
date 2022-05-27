@@ -8,8 +8,10 @@ import java.util.TreeMap;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import androidx.documentfile.provider.DocumentFile;
 import android.text.Html;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -61,6 +63,7 @@ public class VolumesActivity
                 );
                 intent.putExtra(MStrings.ITEM, position);
                 intent.putExtra(MStrings.MANGA, item);
+                intent.putExtra(MStrings.VOLUME, mData.get(position));
                 startActivity(intent);
             }
         });
@@ -95,6 +98,7 @@ public class VolumesActivity
     protected void onResume() {
         super.onResume();
 
+        /*
         VolumesCache cache = VolumesCache.getCachedItems(
                 item,
                 getApplicationContext()
@@ -109,7 +113,23 @@ public class VolumesActivity
             mData = cache.items;
             mAdapter = new VolumesAdapter();
             this.setListAdapter(mAdapter);
+        } */
+
+
+        mData = new ArrayList<VolumeItem>();
+
+        DocumentFile documentsTree = DocumentFile.fromTreeUri(getApplicationContext(), Uri.parse(item.url));
+        if (documentsTree != null) {
+            DocumentFile[] childDocuments = documentsTree.listFiles();
+
+            for(DocumentFile file: childDocuments) {
+                VolumeItem item = new VolumeItem(file.getName(), file.getUri().toString(), 0);
+                mData.add(item);
+            }
         }
+
+        mAdapter = new VolumesAdapter();
+        this.setListAdapter(mAdapter);
 
         this.mAdapter.notifyDataSetChanged();
     }

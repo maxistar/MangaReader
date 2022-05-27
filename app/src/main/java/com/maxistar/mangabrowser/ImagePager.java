@@ -1,6 +1,7 @@
 package com.maxistar.mangabrowser;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
@@ -13,11 +14,14 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+
+import androidx.documentfile.provider.DocumentFile;
 
 public class ImagePager extends View implements Animator.Animable {
     Bitmap bitmap = null; // current bitmap
@@ -30,7 +34,7 @@ public class ImagePager extends View implements Animator.Animable {
     SimpleAnimation nextPageAnimation;
     SimpleAnimation currentPageAnimation;
 
-    ArrayList<File> files = new ArrayList<File>();
+    ArrayList<DocumentFile> files = new ArrayList<DocumentFile>();
     VolumeItem item = null;
 
     Matrix matrix = null;
@@ -362,7 +366,7 @@ public class ImagePager extends View implements Animator.Animable {
         return saveScale;
     }
 
-    void setFiles(ArrayList<File> files, VolumeItem item, VolumeActivity owner){
+    void setFiles(ArrayList<DocumentFile> files, VolumeItem item, VolumeActivity owner){
         this.files = files;
         this.item = item;
         this.owner = owner;
@@ -375,7 +379,10 @@ public class ImagePager extends View implements Animator.Animable {
     Bitmap getBitmap(int index) {
         Bitmap bitmap;
         try {
-            bitmap =  BitmapFactory.decodeFile(files.get(index).getAbsolutePath());
+            //InputStream input = this.getContext().getContentResolver().openInputStream(files.get(index).getUri());
+            //bitmap =  BitmapFactory.decodeStream(input);
+            bitmap = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(), files.get(index).getUri());
+
             if (bitmap == null) {
                 bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.error_image);
             }

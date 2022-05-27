@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -28,13 +29,14 @@ public class FavoritesActivity extends ListActivity {
     private List <MangaItem> mData;
     protected ImageLoader imageloader;
 
+    static Uri filesUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
         imageloader = new ImageLoader(this.getApplicationContext());
-        mData = MangaUtils.getFavoritesList(this.getApplicationContext());
+        mData = MangaUtils.getFavoritesListNew(filesUri, this.getApplicationContext());
         mAdapter = new FavoritesAdapter();
         this.setListAdapter(mAdapter);
 

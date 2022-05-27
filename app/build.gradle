@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 31
 
     defaultConfig {
         applicationId "com.maxistar.mangabrowser"
-        minSdkVersion 8
+        minSdkVersion 14
         targetSdkVersion 31
 
         testApplicationId "com.maxistar.mangabrowser.test"
@@ -25,6 +25,8 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:22.2.1'
-    implementation 'com.android.support:design:22.2.1'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.6.0'
+    // magic! https://stackoverflow.com/questions/62375696/unexpected-behavior-when-documentfile-fromtreeuri-is-called-on-uri-of-subdirec
+    implementation 'androidx.documentfile:documentfile:1.0.1'
 }

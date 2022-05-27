@@ -8,6 +8,7 @@ import java.util.Comparator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
@@ -21,13 +22,15 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.documentfile.provider.DocumentFile;
+
 public class VolumeActivity extends Activity implements MangaLoader.OnProgressUpdateListener {
 
     VolumeItem item;
     int item_id = 0;
     int totalVolumes; //total volumes in manga
     MangaItem manga;
-    ArrayList <File> files;
+    ArrayList <DocumentFile> files;
     ImagePager imagePager;
     VolumesCache cache;
     RelativeLayout navigationBar;
@@ -46,7 +49,7 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
 
         cache = VolumesCache.getCachedItems(manga, getApplicationContext());
         totalVolumes = cache.items.size();
-        item = cache.items.get(item_id);
+        //item = cache.items.get(item_id);
 
         setContentView(R.layout.activity_volume);
 
@@ -59,16 +62,16 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
 
 
         View empty = (View) findViewById(android.R.id.empty);
-        if(MangaLoader.getVolumeStatus(manga, item) == MangaLoader.MANGA_LOADED){
+        // if(MangaLoader.getVolumeStatus(manga, item) == MangaLoader.MANGA_LOADED){
             empty.setVisibility(View.GONE);
             initBitmaps();
-        } else {
-            imagePager.setVisibility(View.GONE);
-            downloadImages();
-            VolumesActivity.update_flag = true;
-            initAds(); //do not show ads if images are loaded already
-            this.hideNavigationBar();
-        }
+        //} else {
+        //    imagePager.setVisibility(View.GONE);
+        //    downloadImages();
+        //    VolumesActivity.update_flag = true;
+        //    initAds(); //do not show ads if images are loaded already
+        //    this.hideNavigationBar();
+        //}
 
         setupNavigationButtons();
     }
@@ -159,11 +162,13 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
     void restoreState(Bundle state) {
         item_id = state.getInt("item_id");
         manga = (MangaItem)state.getSerializable("manga");
+        item = (VolumeItem) state.getSerializable(MStrings.VOLUME);
     }
     
     void initState() {
         item_id = this.getIntent().getExtras().getInt(MStrings.ITEM);
         manga = (MangaItem)this.getIntent().getExtras().getSerializable(MStrings.MANGA);
+        item = (VolumeItem) this.getIntent().getExtras().getSerializable(MStrings.VOLUME);
     }
   
     protected void onSaveInstanceState(Bundle outState) {
@@ -173,7 +178,7 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
     }
 
     void initBitmaps(){
-        files = new ArrayList<File>();
+        /*files = new ArrayList<File>();
         String foldername = Environment.getExternalStorageDirectory()
                 + MStrings.SLASH + MStrings.MANGABROWSER
                 + MStrings.SLASH
@@ -185,19 +190,33 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
         if (!dir.exists()) {
             showToast(l(R.string.Network_Error));
             return;
+        }*/
+
+        files = new ArrayList<DocumentFile>();
+
+        DocumentFile documentsTree = DocumentFile.fromTreeUri(getApplicationContext(), Uri.parse(item.url));
+        if (documentsTree != null) {
+            DocumentFile[] childDocuments = documentsTree.listFiles();
+
+            for(DocumentFile file: childDocuments) {
+            //    MangaItem item = new MangaItem(file.getName(), file.getUri().toString(), 0, 0);
+                files.add(file);
+            }
         }
+
+
 
         ImagePager viewPager = (ImagePager) findViewById(R.id.view_pager);
         viewPager.setVisibility(View.VISIBLE);
 
-
+        /*
         Collections.addAll(files, dir.listFiles());
         Collections.sort(files,new Comparator<File>(){
             @Override
             public int compare(File lhs, File rhs) {
                 // TODO Auto-generated method stub
                 return lhs.getName().compareTo(rhs.getName());
-            }});
+            }}); */
         imagePager.setFiles(files, item, this);
 
         checkNavigationVisibility();

@@ -12,13 +12,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient; */
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -93,6 +94,8 @@ abstract public class BaseSearchAdapter {
     }
 
     String getGetData(String address) throws Exception {
+        return "";
+        /*
         if (address.indexOf("http") != 0 && address.indexOf("//") != 0) {
             address = this.server_address + address;
         }
@@ -110,13 +113,16 @@ abstract public class BaseSearchAdapter {
             data.append(line);
             line = reader.readLine();
         }
-        return data.toString();
+        return data.toString(); */
     }
 
     String getPostData(
-            String address,
-            List<NameValuePair> postParams
+            String address//,
+            //List<NameValuePair> postParams
     ) throws Exception {
+
+        return "";
+        /*
         HttpClient client = new DefaultHttpClient();
         client.getParams().setParameter("http.protocol.content-charset","UTF-8");
 
@@ -139,7 +145,7 @@ abstract public class BaseSearchAdapter {
             data.append(line);
             line = reader.readLine();
         }
-        return data.toString();
+        return data.toString(); */
     }
 
 

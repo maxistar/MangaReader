@@ -53,8 +53,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
+// import org.apache.http.NameValuePair;
+// import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -78,13 +78,14 @@ public class ReadMangaMe extends BaseSearchAdapter {
 
         try {
 
-            List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-            postParams.add(new BasicNameValuePair("q", word));
+            // List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+            // postParams.add(new BasicNameValuePair("q", word));
 
 
             String results = this
-                    .getPostData(server_address+"/search/",
-                    postParams);
+                    .getPostData(server_address+"/search/" //,
+                    //postParams
+                    );
 
             int pos = results.indexOf("<div id=\"mangaResults\">");
             results = results.substring(pos);

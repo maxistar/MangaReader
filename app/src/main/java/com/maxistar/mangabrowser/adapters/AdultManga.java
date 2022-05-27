@@ -53,8 +53,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
+// import org.apache.http.NameValuePair;
+// import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -75,12 +75,13 @@ public class AdultManga extends BaseSearchAdapter {
 
     public SearchResult search(String word, int page) {
         try {
-            List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-            postParams.add(new BasicNameValuePair("q", word));
+            // List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+            // postParams.add(new BasicNameValuePair("q", word));
 
             String results = this
-                    .getPostData("http://adultmanga.ru/search/",
-                    postParams);
+                    .getPostData("http://adultmanga.ru/search/" //,
+                    //postParams
+                    );
 
             int pos = results.indexOf("<div id=\"mangaResults\">");
             results = results.substring(pos);

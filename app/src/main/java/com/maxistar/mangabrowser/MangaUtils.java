@@ -21,7 +21,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Environment;
+import androidx.documentfile.provider.DocumentFile;
 
 import com.maxistar.mangabrowser.adapters.BaseSearchAdapter;
 
@@ -184,5 +186,23 @@ public class MangaUtils {
             child.delete();
         }
         folder.delete();
+    }
+
+    public static List<MangaItem> getFavoritesListNew(Uri directoryUri, Context context) {
+        ArrayList <MangaItem> list = new ArrayList<MangaItem>();
+
+
+
+        DocumentFile documentsTree = DocumentFile.fromTreeUri(context, directoryUri);
+        if (documentsTree != null) {
+            DocumentFile[] childDocuments = documentsTree.listFiles();
+
+            for(DocumentFile file: childDocuments) {
+                MangaItem item = new MangaItem(file.getName(), file.getUri().toString(), 0, 0);
+                list.add(item);
+            }
+        }
+
+        return list;
     }
 }
