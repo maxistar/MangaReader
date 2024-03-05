@@ -1,5 +1,6 @@
 package com.maxistar.mangabrowser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -36,7 +37,8 @@ public class FavoritesActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
         imageloader = new ImageLoader(this.getApplicationContext());
-        mData = MangaUtils.getFavoritesListNew(filesUri, this.getApplicationContext());
+        //mData = MangaUtils.getFavoritesListNew(filesUri, this.getApplicationContext());
+        mData = new ArrayList<MangaItem>();
         mAdapter = new FavoritesAdapter();
         this.setListAdapter(mAdapter);
 

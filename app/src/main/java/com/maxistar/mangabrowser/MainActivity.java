@@ -24,6 +24,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.provider.DocumentsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,6 +61,25 @@ public class MainActivity extends Activity {
             }
         });
 
+        button = (Button) this.findViewById(R.id.add_folder);
+        button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                openDirectory();
+            }
+        });
+
+    }
+
+    public void openDirectory() {
+        // Choose a directory using the system's file picker.
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+
+        // Optionally, specify a URI for the directory that should be opened in
+        // the system file picker when it loads.
+        // intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, uriToLoad);
+
+        startActivityForResult(intent, 111);
     }
 
 
@@ -93,8 +113,20 @@ public class MainActivity extends Activity {
             int resultCode,
             final Intent data
     ) {
-
         if (requestCode == REQUEST_FOLDER_SELECTED) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    Uri uri = data.getData();
+                    if (uri != null) {
+                        FavoritesActivity.filesUri = uri;
+                        showToast(R.string.About_Software);
+                    }
+                }
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                showToast(R.string.abc_search_hint);
+            }
+        }
+        if (requestCode == 111) {
             if (resultCode == Activity.RESULT_OK) {
                 if (data != null) {
                     Uri uri = data.getData();

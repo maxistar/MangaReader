@@ -191,8 +191,6 @@ public class MangaUtils {
     public static List<MangaItem> getFavoritesListNew(Uri directoryUri, Context context) {
         ArrayList <MangaItem> list = new ArrayList<MangaItem>();
 
-
-
         DocumentFile documentsTree = DocumentFile.fromTreeUri(context, directoryUri);
         if (documentsTree != null) {
             DocumentFile[] childDocuments = documentsTree.listFiles();

@@ -25,6 +25,15 @@
         android:layout_below="@+id/search"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="@string/Favorites" />    
-    
+        android:text="@string/Favorites" />
+
+    <Button
+        android:id="@+id/add_folder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/favorites"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Add Folder" />
+
 </RelativeLayout>
