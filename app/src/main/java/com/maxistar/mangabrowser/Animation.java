@@ -7,11 +7,11 @@ package com.maxistar.mangabrowser;
  *
  */
 public interface Animation {
-	
-	/**
-	 * Transforms the view.
-	 * @return true if this animation should remain active.  False otherwise.
-	 */
-	public boolean update();
-	
+
+    /**
+     * Transforms the view.
+     * @return true if this animation should remain active.  False otherwise.
+     */
+    public boolean update();
+
 }

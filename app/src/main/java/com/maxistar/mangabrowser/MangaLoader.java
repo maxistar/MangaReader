@@ -15,216 +15,207 @@ import com.maxistar.mangabrowser.adapters.BaseSearchAdapter.OnDownloadProgressLi
 
 public class MangaLoader {
 
-	static final int MANGA_LOADED = 1;
-	static final int MANGA_LOADING = 2;
-	static final int MANGA_NOT_LOADED = 3;
+    static final int MANGA_LOADED = 1;
+    static final int MANGA_LOADING = 2;
+    static final int MANGA_NOT_LOADED = 3;
 
-	final int stub_id = R.drawable.download;
-	static private MangaLoader instance = null;
+    final int stub_id = R.drawable.download;
+    static private MangaLoader instance = null;
 
-	ExecutorService executorService;
-	Handler handler = new Handler();// handler to display images in UI thread
-	Set<String> loading_tasks = new HashSet<String>();
+    ExecutorService executorService;
+    Handler handler = new Handler();// handler to display images in UI thread
+    Set<String> loading_tasks = new HashSet<String>();
 
-	HashSet<OnProgressUpdateListener> progress_listeners = new HashSet<OnProgressUpdateListener>();
+    HashSet<OnProgressUpdateListener> progress_listeners = new HashSet<OnProgressUpdateListener>();
 
-	private MangaLoader() {
-		executorService = Executors.newFixedThreadPool(5);
-	}
+    private MangaLoader() {
+        executorService = Executors.newFixedThreadPool(5);
+    }
 
-	static private MangaLoader singleton() {
-		if (MangaLoader.instance == null) {
-			MangaLoader.instance = new MangaLoader();
-		}
-		return MangaLoader.instance;
-	}
+    static private MangaLoader singleton() {
+        if (MangaLoader.instance == null) {
+            MangaLoader.instance = new MangaLoader();
+        }
+        return MangaLoader.instance;
+    }
 
-	private int getVolumeStatusInt(MangaItem manga, VolumeItem volume) {
-		if (loading_tasks.contains(volume.getUniqueKey())) {
-			return MangaLoader.MANGA_LOADING;			
-		} else if (MangaUtils.isVolumeDownloaded(manga, volume)) {
-			return MangaLoader.MANGA_LOADED;
-		} else {
-			return MangaLoader.MANGA_NOT_LOADED;
-		}
-	}
+    private int getVolumeStatusInt(MangaItem manga, VolumeItem volume) {
+        if (loading_tasks.contains(volume.getUniqueKey())) {
+            return MangaLoader.MANGA_LOADING;
+        } else if (MangaUtils.isVolumeDownloaded(manga, volume)) {
+            return MangaLoader.MANGA_LOADED;
+        } else {
+            return MangaLoader.MANGA_NOT_LOADED;
+        }
+    }
 
-	private void downloadMangaInt(MangaItem manga, VolumeItem volume) {
-		if (this.loading_tasks.contains(volume.getUniqueKey()))
-			return; // already downloading!
-		
-		this.loading_tasks.add(volume.getUniqueKey());
+    private void downloadMangaInt(MangaItem manga, VolumeItem volume) {
+        if (this.loading_tasks.contains(volume.getUniqueKey()))
+            return; // already downloading!
 
-		executorService.submit(new VolumeLoader(manga, volume));
-	}
+        this.loading_tasks.add(volume.getUniqueKey());
 
-	private void setProgressListenerInt(OnProgressUpdateListener listener) {
-		if (listener != null)
+        executorService.submit(new VolumeLoader(manga, volume));
+    }
 
-			this.progress_listeners.add(listener);
-	}
+    private void setProgressListenerInt(OnProgressUpdateListener listener) {
+        if (listener != null)
 
-	private void removeProgressListenerInt(OnProgressUpdateListener listener) {
-		if (listener == null) return;
-		if (!this.progress_listeners.contains(listener)) return;
-		this.progress_listeners.remove(listener);
-	}
+            this.progress_listeners.add(listener);
+    }
 
-	static public void downloadManga(MangaItem manga, VolumeItem volume) {
-		MangaLoader.singleton().downloadMangaInt(manga, volume);
-	}
+    private void removeProgressListenerInt(OnProgressUpdateListener listener) {
+        if (listener == null) return;
+        if (!this.progress_listeners.contains(listener)) return;
+        this.progress_listeners.remove(listener);
+    }
 
-	// static public void displayImage(Context context, MangaItem manga,
-	// VolumeItem volume, ImageView imageView) {
-	// MangaLoader.singleton().displayImageInt(manga, volume, imageView);
-	// }
+    static public void downloadManga(MangaItem manga, VolumeItem volume) {
+        MangaLoader.singleton().downloadMangaInt(manga, volume);
+    }
 
-	static public int getVolumeStatus(MangaItem manga, VolumeItem volume) {
-		return MangaLoader.singleton().getVolumeStatusInt(manga, volume);
-	}
+    // static public void displayImage(Context context, MangaItem manga,
+    // VolumeItem volume, ImageView imageView) {
+    // MangaLoader.singleton().displayImageInt(manga, volume, imageView);
+    // }
 
-	static public void setProgressListener(OnProgressUpdateListener listener) {
-		MangaLoader.singleton().setProgressListenerInt(listener);
-	}
+    static public int getVolumeStatus(MangaItem manga, VolumeItem volume) {
+        return MangaLoader.singleton().getVolumeStatusInt(manga, volume);
+    }
 
-	static public void removeProgressListener(OnProgressUpdateListener listener) {
-		MangaLoader.singleton().removeProgressListenerInt(listener);
-	}
+    static public void setProgressListener(OnProgressUpdateListener listener) {
+        MangaLoader.singleton().setProgressListenerInt(listener);
+    }
 
-	class VolumeLoader implements Runnable, OnDownloadProgressListener {
-		MangaItem manga;
-		VolumeItem volume;
+    static public void removeProgressListener(OnProgressUpdateListener listener) {
+        MangaLoader.singleton().removeProgressListenerInt(listener);
+    }
 
-		VolumeLoader(MangaItem manga, VolumeItem volume) {
-			this.manga = manga;
-			this.volume = volume;
-		}
+    class VolumeLoader implements Runnable, OnDownloadProgressListener {
+        MangaItem manga;
+        VolumeItem volume;
 
-		@Override
-		public void run() {
-			BaseSearchAdapter adapter;
-			try {
-				
-				StartProgressDisplayer bd0 = new StartProgressDisplayer(volume);
-				handler.post(bd0);
-				
-				String foldername = Environment.getExternalStorageDirectory()
-						+ MStrings.SLASH+MStrings.MANGABROWSER+MStrings.SLASH+MStrings.DOWNLOAD+MStrings.SLASH
-						+ MangaUtils.getFolderName(manga.manga_type) + MStrings.SLASH
-						+ manga.getFolderName() + MStrings.SLASH + volume.getFolderName();
+        VolumeLoader(MangaItem manga, VolumeItem volume) {
+            this.manga = manga;
+            this.volume = volume;
+        }
 
-				File direct = new File(foldername);
-				if (!direct.exists()) {
-					direct.mkdirs();
-				}
+        @Override
+        public void run() {
+            BaseSearchAdapter adapter;
+            try {
 
-				adapter = BaseSearchAdapter.getSearchAdapter(volume.manga_type);
-				adapter.setOnDownloadProgressListner(this);
-				adapter.downloadImages(volume, foldername);
+                StartProgressDisplayer bd0 = new StartProgressDisplayer(volume);
+                handler.post(bd0);
 
-				CompleteProgressDisplayer bd = new CompleteProgressDisplayer(
-						manga, volume);
-				handler.post(bd);
-			} catch (Throwable th) {
-				th.printStackTrace();
-			}
-		}
+                String foldername = Environment.getExternalStorageDirectory()
+                        + MStrings.SLASH+MStrings.MANGABROWSER+MStrings.SLASH+MStrings.DOWNLOAD+MStrings.SLASH
+                        + MangaUtils.getFolderName(manga.manga_type) + MStrings.SLASH
+                        + manga.getFolderName() + MStrings.SLASH + volume.getFolderName();
 
-		@Override
-		public void notifyProgress(float progress) {
-			UpdateProgressDisplayer bd = new UpdateProgressDisplayer(volume,
-					progress);
-			handler.post(bd);
-		}
-	}
+                File direct = new File(foldername);
+                if (!direct.exists()) {
+                    direct.mkdirs();
+                }
 
-	class UpdateProgressDisplayer implements Runnable {
-		VolumeItem item;
-		float progress;
+                adapter = BaseSearchAdapter.getSearchAdapter(volume.manga_type);
+                adapter.setOnDownloadProgressListner(this);
+                adapter.downloadImages(volume, foldername);
 
-		UpdateProgressDisplayer(VolumeItem item, float progress) {
-			this.item = item;
-			this.progress = progress;
-		}
+                CompleteProgressDisplayer bd = new CompleteProgressDisplayer(
+                        manga, volume);
+                handler.post(bd);
+            } catch (Throwable th) {
+                th.printStackTrace();
+            }
+        }
 
-		public void run() {
-			Iterator<OnProgressUpdateListener> it = progress_listeners
-					.iterator();
-			while (it.hasNext()) {
-				OnProgressUpdateListener l = it.next();
-				l.onProgressUpdate(item, progress);
-			}
-		}
-	}
+        @Override
+        public void notifyProgress(float progress) {
+            UpdateProgressDisplayer bd = new UpdateProgressDisplayer(volume,
+                    progress);
+            handler.post(bd);
+        }
+    }
 
-	class StartProgressDisplayer implements Runnable {
-		VolumeItem item;
+    class UpdateProgressDisplayer implements Runnable {
+        VolumeItem item;
+        float progress;
 
-		StartProgressDisplayer(VolumeItem item) {
-			this.item = item;
-		}
+        UpdateProgressDisplayer(VolumeItem item, float progress) {
+            this.item = item;
+            this.progress = progress;
+        }
 
-		public void run() {
-			Iterator<OnProgressUpdateListener> it = progress_listeners
-					.iterator();
-			while (it.hasNext()) {
-				OnProgressUpdateListener l = it.next();
-				l.onDownloadStarted(item);
-			}
-		}
-	}
-	
-	
-	class CompleteProgressDisplayer implements Runnable {
-		VolumeItem item;
-		MangaItem manga;
+        public void run() {
+            for (OnProgressUpdateListener l : progress_listeners) {
+                l.onProgressUpdate(item, progress);
+            }
+        }
+    }
 
-		CompleteProgressDisplayer(MangaItem manga, VolumeItem item) {
-			this.item = item;
-			this.manga = manga;
-		}
+    class StartProgressDisplayer implements Runnable {
+        VolumeItem item;
 
-		public void run() {
-			File current = new File(Environment.getExternalStorageDirectory()
-					+ MStrings.SLASH+MStrings.MANGABROWSER+MStrings.SLASH+MStrings.DOWNLOAD+MStrings.SLASH
-					+ MangaUtils.getFolderName(manga.manga_type) + MStrings.SLASH
-					+ manga.getFolderName() + MStrings.SLASH + item.getFolderName());
+        StartProgressDisplayer(VolumeItem item) {
+            this.item = item;
+        }
 
-			File newpath = new File(Environment.getExternalStorageDirectory()
-					+ MStrings.SLASH+MStrings.MANGABROWSER+MStrings.SLASH
-					+ MangaUtils.getFolderName(manga.manga_type) + MStrings.SLASH
-					+ manga.getFolderName() + MStrings.SLASH + item.getFolderName());
-			
-			//current.renameTo(newpath);
+        public void run() {
+            for (OnProgressUpdateListener l : progress_listeners) {
+                l.onDownloadStarted(item);
+            }
+        }
+    }
 
-			
-			if (newpath.exists()) {
-				//newpath.delete(); //remove old folder
-				MangaUtils.deleteFolder(newpath);
-			}
-			if (!newpath.getParentFile().exists()) {
-				newpath.getParentFile().mkdirs();
-			}
-			if (!current.renameTo(newpath)) {
 
-			}
+    class CompleteProgressDisplayer implements Runnable {
+        VolumeItem item;
+        MangaItem manga;
 
-			loading_tasks.remove(item.getUniqueKey());
+        CompleteProgressDisplayer(MangaItem manga, VolumeItem item) {
+            this.item = item;
+            this.manga = manga;
+        }
 
-			Iterator<OnProgressUpdateListener> it = progress_listeners
-					.iterator();
-			while (it.hasNext()) {
-				OnProgressUpdateListener l = it.next();
-				l.onDownloadComplete(item);
-			}
-		}
-	}
+        public void run() {
+            File current = new File(Environment.getExternalStorageDirectory()
+                    + MStrings.SLASH+MStrings.MANGABROWSER+MStrings.SLASH+MStrings.DOWNLOAD+MStrings.SLASH
+                    + MangaUtils.getFolderName(manga.manga_type) + MStrings.SLASH
+                    + manga.getFolderName() + MStrings.SLASH + item.getFolderName());
 
-	public interface OnProgressUpdateListener {
-		void onProgressUpdate(VolumeItem item, float progress);
+            File newpath = new File(Environment.getExternalStorageDirectory()
+                    + MStrings.SLASH+MStrings.MANGABROWSER+MStrings.SLASH
+                    + MangaUtils.getFolderName(manga.manga_type) + MStrings.SLASH
+                    + manga.getFolderName() + MStrings.SLASH + item.getFolderName());
 
-		void onDownloadComplete(VolumeItem item);
-		
-		void onDownloadStarted(VolumeItem item);
-	}
+            //current.renameTo(newpath);
+
+
+            if (newpath.exists()) {
+                //newpath.delete(); //remove old folder
+                MangaUtils.deleteFolder(newpath);
+            }
+            if (!newpath.getParentFile().exists()) {
+                newpath.getParentFile().mkdirs();
+            }
+            if (!current.renameTo(newpath)) {
+
+            }
+
+            loading_tasks.remove(item.getUniqueKey());
+
+            for (OnProgressUpdateListener l : progress_listeners) {
+                l.onDownloadComplete(item);
+            }
+        }
+    }
+
+    public interface OnProgressUpdateListener {
+        void onProgressUpdate(VolumeItem item, float progress);
+
+        void onDownloadComplete(VolumeItem item);
+
+        void onDownloadStarted(VolumeItem item);
+    }
 }

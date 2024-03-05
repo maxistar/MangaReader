@@ -21,81 +21,81 @@ package com.maxistar.mangabrowser;
  *
  */
 public class Animator extends Thread {
-	
-	private Animable view;
-	private Animation animation;
-	private boolean running = false;
-	private boolean active = false;
-	private long lastTime = -1L;
 
-	public Animator(Animable view, String threadName) {
-		super(threadName);
-		this.view = view;
-	}
-	
-	@Override
-	public void run() {
-		
-		running = true;
-		
-		while(running) {
-				
-			while(active && animation != null) {
-				long time = System.currentTimeMillis();
-				active = animation.update();
-				view.redraw();
-				lastTime = time;					
-				
-				while(active) {
-					try {
-						if(view.waitForDraw(32)) { // 30Htz
-							break;
-						}
-					} catch (InterruptedException ignore) {
-						active = false;
-					}
-				}
-			}
-			
-			synchronized(this) {
-				if(running) {
-					try {
-						wait();
-					}
-					catch (InterruptedException ignore) {}
-				}
-			}
-		}
-	}
+    private Animable view;
+    private Animation animation;
+    private boolean running = false;
+    private boolean active = false;
+    private long lastTime = -1L;
 
-	public synchronized void finish() {
-		running = false;
-		active = false;
-		notifyAll();
-	}
+    public Animator(Animable view, String threadName) {
+        super(threadName);
+        this.view = view;
+    }
 
-	public void play(Animation transformer) {
-		if(active) {
-			cancel();
-		}
- 		this.animation = transformer;
- 		
- 		activate();
-	}
-	
-	public synchronized void activate() {
-		lastTime = System.currentTimeMillis();
-		active = true;
-		notifyAll();
-	}
-	
-	public void cancel() {
-		active = false;
-		animation = null;
-	}
-	
-	public interface Animable {
-		public boolean waitForDraw(long timeout) throws InterruptedException;
-		void redraw();
-	}
+    @Override
+    public void run() {
+
+        running = true;
+
+        while(running) {
+
+            while(active && animation != null) {
+                long time = System.currentTimeMillis();
+                active = animation.update();
+                view.redraw();
+                lastTime = time;
+
+                while(active) {
+                    try {
+                        if(view.waitForDraw(32)) { // 30Htz
+                            break;
+                        }
+                    } catch (InterruptedException ignore) {
+                        active = false;
+                    }
+                }
+            }
+
+            synchronized(this) {
+                if(running) {
+                    try {
+                        wait();
+                    }
+                    catch (InterruptedException ignore) {}
+                }
+            }
+        }
+    }
+
+    public synchronized void finish() {
+        running = false;
+        active = false;
+        notifyAll();
+    }
+
+    public void play(Animation transformer) {
+        if(active) {
+            cancel();
+        }
+        this.animation = transformer;
+
+        activate();
+    }
+
+    public synchronized void activate() {
+        lastTime = System.currentTimeMillis();
+        active = true;
+        notifyAll();
+    }
+
+    public void cancel() {
+        active = false;
+        animation = null;
+    }
+
+    public interface Animable {
+        public boolean waitForDraw(long timeout) throws InterruptedException;
+        void redraw();
+    }
 }
