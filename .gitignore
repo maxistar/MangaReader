@@ -11,3 +11,4 @@
 /build
 /captures
 /app/build
+/tests/node_modules
