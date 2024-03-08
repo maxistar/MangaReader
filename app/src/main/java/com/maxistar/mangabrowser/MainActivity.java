@@ -17,20 +17,32 @@
 package com.maxistar.mangabrowser;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.Closeable;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -128,18 +140,133 @@ public class MainActivity extends Activity {
         }
         if (requestCode == 111) {
             if (resultCode == Activity.RESULT_OK) {
-                if (data != null) {
+                //if (data != null) {
+                //    Uri uri = data.getData();
+                //    if (uri != null) {
+                //        FavoritesActivity.filesUri = uri;
+                //        showToast(R.string.About_Software);
+                //    }
+                //}
+                if (data != null && data.getData() != null) {
                     Uri uri = data.getData();
-                    if (uri != null) {
-                        FavoritesActivity.filesUri = uri;
-                        showToast(R.string.About_Software);
-                    }
+                    Log.d("TAG", "Selected directory: " + uri.toString());
+
+                    // List files in the selected directory
+                    listFilesInDirectory(uri);
                 }
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 showToast(R.string.abc_search_hint);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void listFilesInDirectory(Uri uri) {
+        if (uri == null) return;
+
+        ArrayList<Uri> list = traverseDirectoryEntries(uri);
+
+
+        for (Uri fileUrld: list) {
+            readDocumentContent(fileUrld);
+        }
+
+        // Get the document ID of the selected directory
+        //String documentId = DocumentsContract.getTreeDocumentId(uri);
+
+        // Build URI for children documents of the selected directory
+        //Uri childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(uri, documentId);
+
+        //try (InputStream inputStream = getContentResolver().openInputStream(childrenUri);
+        //     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+
+        //    String line;
+        //    while ((line = reader.readLine()) != null) {
+                // For each document in the directory, read its content
+        //        Uri documentUri = DocumentsContract.buildDocumentUriUsingTree(uri, line);
+        //        readDocumentContent(documentUri);
+        //    }
+        //} catch (IOException e) {
+        //    e.printStackTrace();
+        //}
+    }
+
+    ArrayList<Uri> traverseDirectoryEntries(Uri rootUri) {
+        ArrayList<Uri> listUri = new ArrayList<>();
+
+        ContentResolver contentResolver = this.getContentResolver();
+        Uri childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(rootUri,
+                DocumentsContract.getTreeDocumentId(rootUri));
+
+        // Keep track of our directory hierarchy
+        List<Uri> dirNodes = new LinkedList<>();
+        dirNodes.add(childrenUri);
+
+        while(!dirNodes.isEmpty()) {
+            childrenUri = dirNodes.remove(0); // get the item from top
+            Log.d("dfddf", "node uri: " + childrenUri);
+            Cursor c = contentResolver.query(childrenUri, new String[]{
+                            DocumentsContract.Document.COLUMN_DOCUMENT_ID,
+                            DocumentsContract.Document.COLUMN_DISPLAY_NAME,
+                            DocumentsContract.Document.COLUMN_MIME_TYPE},
+                    null, null, null);
+            try {
+                while (c.moveToNext()) {
+                    final String docId = c.getString(0);
+                    final String name = c.getString(1);
+                    final String mime = c.getString(2);
+                    Log.d("dfddf", "docId: " + docId + ", name: " + name + ", mime: " + mime);
+                    if(isDirectory(mime)) {
+                        final Uri newNode = DocumentsContract.buildChildDocumentsUriUsingTree(rootUri, docId);
+                        dirNodes.add(newNode);
+                    }
+                    else {
+                        if (name.contains(".txt")) { // maybe you should check mime here?
+                            final Uri newNode = DocumentsContract.buildChildDocumentsUriUsingTree(rootUri, docId);
+                            listUri.add(newNode);
+                        }
+                    }
+                }
+            } finally {
+                closeQuietly(c);
+            }
+        }
+        return listUri;
+    }
+
+    // Util method to check if the mime type is a directory
+    private static boolean isDirectory(String mimeType) {
+        return DocumentsContract.Document.MIME_TYPE_DIR.equals(mimeType);
+    }
+
+    // Util method to close a closeable
+    private static void closeQuietly(Closeable closeable) {
+        if (closeable != null) {
+            try {
+                closeable.close();
+            } catch (RuntimeException re) {
+                throw re;
+            } catch (Exception ignore) {
+                // ignore exception
+            }
+        }
+    }
+
+    private void readDocumentContent(Uri documentUri) {
+        try (InputStream inputStream = getContentResolver().openInputStream(documentUri);
+             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+
+            StringBuilder stringBuilder = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line).append("\n");
+            }
+
+            // Output the content of the document
+            Log.d("TAG", "Document content: " + stringBuilder.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void showToast(int toast_str) {
