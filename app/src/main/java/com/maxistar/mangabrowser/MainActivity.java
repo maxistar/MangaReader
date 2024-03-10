@@ -48,6 +48,8 @@ public class MainActivity extends Activity {
 
     final int REQUEST_FOLDER_SELECTED = 10;
 
+    static Uri globalUri = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,7 +152,7 @@ public class MainActivity extends Activity {
                 if (data != null && data.getData() != null) {
                     Uri uri = data.getData();
                     Log.d("TAG", "Selected directory: " + uri.toString());
-
+                    MainActivity.globalUri = uri;
                     // List files in the selected directory
                     listFilesInDirectory(uri);
                 }

@@ -39,6 +39,7 @@ public class FavoritesActivity extends ListActivity {
         imageloader = new ImageLoader(this.getApplicationContext());
         //mData = MangaUtils.getFavoritesListNew(filesUri, this.getApplicationContext());
         mData = new ArrayList<MangaItem>();
+        mData.add(new MangaItem("Test Mange", "http://maxistar.ru", 10, 0));
         mAdapter = new FavoritesAdapter();
         this.setListAdapter(mAdapter);
 

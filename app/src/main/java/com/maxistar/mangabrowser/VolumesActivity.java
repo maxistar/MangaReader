@@ -46,8 +46,10 @@ public class VolumesActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        item = (MangaItem) this.getIntent().getExtras()
-                .getSerializable(MStrings.MANGA);
+        // item = (MangaItem) this.getIntent().getExtras()
+                //.getSerializable(MStrings.MANGA);
+        item = new MangaItem("Test Mange", "http://maxistar.ru", 10, 0);
+
         setContentView(R.layout.activity_volumes);
 
         ListView lv = getListView();
@@ -118,15 +120,17 @@ public class VolumesActivity
 
         mData = new ArrayList<VolumeItem>();
 
-        DocumentFile documentsTree = DocumentFile.fromTreeUri(getApplicationContext(), Uri.parse(item.url));
-        if (documentsTree != null) {
-            DocumentFile[] childDocuments = documentsTree.listFiles();
+        mData.add(new VolumeItem("Volume 1", MainActivity.globalUri.toString(), 0));
 
-            for(DocumentFile file: childDocuments) {
-                VolumeItem item = new VolumeItem(file.getName(), file.getUri().toString(), 0);
-                mData.add(item);
-            }
-        }
+        //DocumentFile documentsTree = DocumentFile.fromTreeUri(getApplicationContext(), Uri.parse(item.url));
+        //if (documentsTree != null) {
+        //    DocumentFile[] childDocuments = documentsTree.listFiles();
+
+        //    for(DocumentFile file: childDocuments) {
+        //        VolumeItem item = new VolumeItem(file.getName(), file.getUri().toString(), 0);
+        //        mData.add(item);
+        //    }
+        //}
 
         mAdapter = new VolumesAdapter();
         this.setListAdapter(mAdapter);

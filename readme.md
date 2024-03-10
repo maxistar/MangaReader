@@ -21,3 +21,20 @@ start appium
 - `appium`
 start tests 
 - `node index.js`
+
+## Send file to device using adb
+
+`adb -s emulator-5554 shell`
+
+```
+storage/emulated/0/Documents/
+mkdir book
+
+
+```
+
+`adb -s push page_001.png /storage/emulated/0/Documents/book`
+
+- [x] add an empty manga to favorites
+- [x] store list of URIs sowhere in the application
+- [x] use uri instead of file

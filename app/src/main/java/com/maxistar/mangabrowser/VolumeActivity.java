@@ -47,8 +47,8 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
             initState();
         }
 
-        cache = VolumesCache.getCachedItems(manga, getApplicationContext());
-        totalVolumes = cache.items.size();
+        // cache = VolumesCache.getCachedItems(manga, getApplicationContext());
+        totalVolumes = 1;//cache.items.size();
         //item = cache.items.get(item_id);
 
         setContentView(R.layout.activity_volume);
@@ -199,7 +199,7 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
             DocumentFile[] childDocuments = documentsTree.listFiles();
 
             for(DocumentFile file: childDocuments) {
-            //    MangaItem item = new MangaItem(file.getName(), file.getUri().toString(), 0, 0);
+                // MangaItem item = new MangaItem(file.getName(), file.getUri().toString(), 0, 0);
                 files.add(file);
             }
         }
