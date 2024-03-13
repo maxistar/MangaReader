@@ -232,7 +232,7 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
 
     public void saveCache(){
         item.read_flag = true;
-        VolumesCache.saveCache(manga, cache.items, this.getApplicationContext());
+        //VolumesCache.saveCache(manga, cache.items, this.getApplicationContext());
     }
 
     void downloadImages(){

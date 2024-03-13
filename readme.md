@@ -38,3 +38,6 @@ mkdir book
 - [x] add an empty manga to favorites
 - [x] store list of URIs sowhere in the application
 - [x] use uri instead of file
+- [x] fix crash when swapped
+- [ ] sort files in correct order
+- [ ] remember when we stopped last time

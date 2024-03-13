@@ -48,7 +48,7 @@ public class VolumesActivity
         super.onCreate(savedInstanceState);
         // item = (MangaItem) this.getIntent().getExtras()
                 //.getSerializable(MStrings.MANGA);
-        item = new MangaItem("Test Mange", "http://maxistar.ru", 10, 0);
+        item = new MangaItem("Test Mange", "http://maxistar.ru", 1, 0);
 
         setContentView(R.layout.activity_volumes);
 
@@ -161,7 +161,7 @@ public class VolumesActivity
             menu.findItem(R.id.remove_from_favorites).setVisible(false);
         }
 
-        menu.findItem(R.id.menu_download_all).setVisible(this.mData.size() > 0);
+        // menu.findItem(R.id.menu_download_all).setVisible(this.mData.size() > 0);
 
         return true;
     }
