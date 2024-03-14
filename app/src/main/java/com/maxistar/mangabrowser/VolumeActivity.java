@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import android.app.Activity;
 import android.content.Context;
@@ -193,6 +196,17 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
         }*/
 
         files = new ArrayList<DocumentFile>();
+        //HashMap map1 = new HashMap<String, DocumentFile>();
+
+        TreeMap<String, DocumentFile> sortedFiles = new TreeMap<>();
+
+        TreeSet<String> sortedNames = new TreeSet<>(new Comparator<String>() {
+            @Override
+            public int compare(String file1, String file2) {
+                return file1.compareTo(file2);
+            }
+        });
+
 
         DocumentFile documentsTree = DocumentFile.fromTreeUri(getApplicationContext(), Uri.parse(item.url));
         if (documentsTree != null) {
@@ -200,9 +214,31 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
 
             for(DocumentFile file: childDocuments) {
                 // MangaItem item = new MangaItem(file.getName(), file.getUri().toString(), 0, 0);
-                files.add(file);
+                // file.getName)
+                String name = file.getName();
+                sortedFiles.put(file.getName(), file);
+                sortedNames.add(name);
+                //map1.put(file.getName(), file);
             }
         }
+
+        for (String name : sortedNames) {
+            //System.out.println(name);
+            // Perform operations on each name as needed
+            files.add(sortedFiles.get(name));
+        }
+
+        // files.addAll(sortedFiles);
+
+        // Collections.sort(files, new Comparator<DocumentFile>() {
+        //     @Override
+        //     public int compare(DocumentFile file1, DocumentFile file2) {
+        //         if (file1 == null || file2 == null || file1.getName() == null || file2.getName() == null) {
+        //             return 0;
+        //         }
+        //         return file1.getName().compareTo(file2.getName());
+        //     }
+        // });
 
 
 
