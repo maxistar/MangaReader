@@ -74,6 +74,9 @@ public class ImagePager extends View implements Animator.Animable {
     float lastZoomIn = 3f; //the last zoom position to save
 
     Handler handler = new Handler();
+
+    SettingsService settingsService;
+
     /**
      * Class constructor taking only a context. Use this constructor to create
      * objects from your own code.
@@ -83,6 +86,7 @@ public class ImagePager extends View implements Animator.Animable {
     public ImagePager(Context context) {
         super(context);
         init(context);
+        settingsService = new SettingsService();
     }
 
     /**
@@ -204,6 +208,7 @@ public class ImagePager extends View implements Animator.Animable {
                     if (next_offset-step_diff<=0){
                         animationStop();
                         item.page_num++;
+                        // settingsService.getCurrentPage(item.page_num)
                         handler.postDelayed(new Runnable(){
                             public void run() {
                                 owner.onPageShown(item.page_num);

@@ -39,6 +39,8 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
     RelativeLayout navigationBar;
     ProgressBar progress;
 
+    SettingsService settingsService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +77,8 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
         //    initAds(); //do not show ads if images are loaded already
         //    this.hideNavigationBar();
         //}
+
+        settingsService = new SettingsService();
 
         setupNavigationButtons();
     }
@@ -138,6 +142,7 @@ public class VolumeActivity extends Activity implements MangaLoader.OnProgressUp
     }
 
     void onPageShown(int page_num){
+        settingsService.setCurrentPage(page_num, getApplicationContext());
         checkNavigationVisibility();
     }
 

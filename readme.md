@@ -40,4 +40,4 @@ mkdir book
 - [x] use uri instead of file
 - [x] fix crash when swapped
 - [x] sort files in correct order
-- [ ] remember when we stopped last time
+- [x] remember when we stopped last time

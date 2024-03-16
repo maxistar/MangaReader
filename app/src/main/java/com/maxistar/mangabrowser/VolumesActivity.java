@@ -43,9 +43,14 @@ public class VolumesActivity
     private final Map<String, ImageView> itemViews = new HashMap<String, ImageView>();
     private final Map<ImageView, String> viewItems = new HashMap<ImageView, String>();
 
+    SettingsService settingsService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        settingsService = new SettingsService();
+
         // item = (MangaItem) this.getIntent().getExtras()
                 //.getSerializable(MStrings.MANGA);
         item = new MangaItem("Test Mange", "http://maxistar.ru", 1, 0);
@@ -70,6 +75,8 @@ public class VolumesActivity
             }
         });
         this.registerForContextMenu(lv);
+
+
 
         MangaLoader.setProgressListener(this);
     }
@@ -120,7 +127,10 @@ public class VolumesActivity
 
         mData = new ArrayList<VolumeItem>();
 
-        mData.add(new VolumeItem("Volume 1", MainActivity.globalUri.toString(), 0));
+        VolumeItem item = new VolumeItem("Volume 1", MainActivity.globalUri.toString(), 0);
+        item.page_num = settingsService.getCurrentPage(getApplicationContext());
+
+        mData.add(item);
 
         //DocumentFile documentsTree = DocumentFile.fromTreeUri(getApplicationContext(), Uri.parse(item.url));
         //if (documentsTree != null) {
